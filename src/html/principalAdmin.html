@@ -1,0 +1,219 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/global.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&icon_names=search" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&display=swap');
+        </style>
+    <title>Pagina principal</title>
+</head>
+<body>
+
+
+    <header>
+        <nav>
+            <ul class="nav-bar">
+                <li class="logo"><a href="#">Event<span class="tit">-hub</a></span></li>
+                    
+                    <input type="checkbox" id="check"/>
+                    <span class="menu">
+                        <li>
+                            <a href="buscarEvento.html">ver eventos</a>
+                        </li>
+
+                        <li>
+                            <a href="#">ver usuarios</a>
+                        </li>
+
+                        <li>
+                            <a href="crearEvento.html">Crear eventos</a>
+                        </li>
+                        <li>
+                            <a href="crearCat.html">crear categoria</a>
+                        </li>
+                        <li>
+                            <a href="verPerfil.html">perfil</a>
+                        </li>
+                        
+                        <label for="check" class="close-menu"><i class="fas fa-times"></i></label>
+                    </span>
+                    <label for="check" class="open-menu"><i class="fas fa-bars"></i></label>
+               
+            </ul>
+        </nav>
+    </header>
+
+    <!-- 
+        <nav>
+            <h2 class="logo">Eventos</h2>
+
+            <form >
+                <div class="search">
+                    <span class="material-symbols-outlined">
+                        search
+                        </span>
+                    <input class="search-input" type="search" placeholder="Busca un evento">
+                </div>
+            </form>
+
+            <ul>
+                <li><a href="#">Busca eventos</a></li>
+                <li><a href="crearEvento.html">Crear eventos</a></li>
+                <li><a href="login.html">Inicar sesion</a></li>
+                <li><a href="#">Registrarte</a></li>
+            </ul>
+        </nav>
+   -->
+
+
+    
+   
+   <header class="hero">
+    <section class="hero__main container">
+        <div class="hero__texts">
+            <h1 class="hero__title">Bienvenido a <a href="#" class="hero_sec">EVENT<span class="tit">-HUB</a></span></h1>
+            <p class="hero__paragraph">Organiza el evento que quieras</p>
+            <a href="crearEvento.html" class="cta">CREAR UN EVENTO</a>
+        </div>
+
+
+        <figure class="hero__pic">
+            <img src="/img/conciertito.webp"  class="hero__img">
+        </figure>
+    </section>
+</header>
+
+
+    <!--
+    <section class="iconCategoryBrowse">
+
+
+        <div class="category">
+            <img class="imgCat" src="/img/music-regular-72.png" alt="Icono 1">
+            <h3>Musica</h3>
+        </div>
+        <div class="category">
+            <img class="imgCat" src="/img/nightlife_72dp_000000_FILL0_wght400_GRAD0_opsz48.png" alt="Icono 2">
+            <h3>Vida nocturna</h3>
+        </div>
+
+        <div class="category">
+            <img class="imgCat" src="/img/palette-regular-72.png" alt="Icono 2">
+            <h3>Artes</h3>
+        </div>
+
+        <div class="category">
+            <img class="imgCat" src="/img/line-chart-down-regular-72.png" alt="Icono 2">
+            <h3>Negocios</h3>
+        </div>
+
+        <div class="category">
+            <img class="imgCat" src="/img/bowl-hot-regular-72.png" alt="Icono 2">
+            <h3>Comida</h3>
+       
+    </section>
+
+    -->
+
+
+    <section class="event-cards">
+        <div class="header">
+            <h2 class="section-title">Eventos Recientes</h2>
+        </div>
+    
+        <div class="cards-container">
+            <div class="card">
+                <img src="/img/fiestaDM.jpeg" alt="Evento 1">
+                <div class="card-content">
+                    <h3>Día de Muertos</h3>
+                    <p>Fecha: 12 Octubre 2024, 20:00</p>
+                    <p>Lugar: Cuernavaca Zócalo</p>
+                </div>
+            </div>
+    
+            <div class="card">
+                <img src="/img/teatro.jpeg" alt="Evento 2">
+                <div class="card-content">
+                    <h3>Orquesta Musical</h3>
+                    <p>Fecha: 22 Octubre 2024, 20:00</p>
+                    <p>Lugar: Teatro Ocampo</p>
+                </div>
+            </div>
+    
+            <div class="card">
+                <img src="/img/fiestaDM.jpeg" alt="Evento 3">
+                <div class="card-content">
+                    <h3>Día de Muertos</h3>
+                    <p>Fecha: 12 Octubre 2024, 20:00</p>
+                    <p>Lugar: Cuernavaca Zócalo</p>
+                </div>
+            </div>
+    
+            <div class="card">
+                <img src="/img/teatro.jpeg" alt="Evento 4">
+                <div class="card-content">
+                    <h3>Orquesta Musical</h3>
+                    <p>Fecha: 22 Octubre 2024, 20:00</p>
+                    <p>Lugar: Teatro Ocampo</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <footer>
+        <div class="waves">
+            <div class="wave" id="wave1"></div>
+            <div class="wave" id="wave2"></div>
+            <div class="wave" id="wave3"></div>
+            <div class="wave" id="wave4"></div>
+        </div>
+
+
+
+        <ul class="social-icon">
+            <li>
+                <a href=""><i class="fa-brands fa-twitter"></i></a>
+            </li>
+            <li>
+                <a href=""><i class="fa-brands fa-facebook"></i></a>
+            </li>
+            <li>
+                <a href=""><i class="fa-brands fa-instagram"></i></a>
+            </li>
+            <li>
+                <a href=""><i class="fa-brands fa-youtube"></i></a>
+            </li>
+
+        </ul>
+
+        <ul class="footer_menu">
+            <li>
+                <a href="">Hogar</a>
+            </li>
+            <li>
+                <a href="">Sobre nosotros</a>
+            </li>
+            <li>
+                <a href="">Servicios</a>
+            </li>
+            <li>
+                <a href="">Contacto</a>
+            </li>
+        </ul>
+        <p>&copy; 2024 EVENT-HUB. | GMMOP</p>
+    </footer>
+    
+  
+</body>
+</html>
+
+

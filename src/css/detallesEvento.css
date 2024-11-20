@@ -1,0 +1,170 @@
+
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh; 
+    margin: 0;
+}
+
+
+main {
+    flex: 1;
+    padding-bottom: 50px; 
+}
+
+/* Contenedor principal */
+.event-details {
+    max-width: 1200px;
+    margin: 2rem auto;
+    display: flex;
+    flex-direction: column; 
+    gap: 1.5rem; 
+    background: #fff;
+    padding: 1.5rem;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+}
+
+
+.event-info-wrapper {
+    display: flex;
+    gap: 0rem;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+/* Imagen del evento */
+.event-details img {
+    width: 100%;
+    max-width: 450px; 
+    border-radius: 8px;
+    object-fit: cover;
+    height: auto;
+}
+
+
+.event-info {
+    display: flex;
+    flex-direction: column; 
+    justify-content: flex-start; 
+}
+
+
+.event-info h1 {
+    font-size: 2rem;
+    color: #333;
+    margin-bottom: 0.5rem;
+}
+
+.event-info h3 {
+    font-size: 1.2rem;
+    color: #777;
+    margin-bottom: 1rem;
+}
+
+
+.event-description {
+    margin-top: 1rem; 
+    padding-top: 1rem; 
+    font-size: 1rem;
+    color: #555;
+    line-height: 1.6;
+    width: 100%; 
+    max-width: 800px; 
+   margin-left: 10%;
+    margin-bottom: 50px; 
+}
+
+
+footer {
+    width: 100%;
+    background-color: #F05537; 
+    padding: 20px 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin-top: auto; 
+    min-height: 150px; 
+    flex-grow: 1;  
+}
+
+
+footer .social-icons {
+    display: flex;
+    gap: 20px; 
+    padding-top: 15px; 
+}
+
+footer .social-icons a {
+    font-size: 1.5rem; 
+    color: #fff; 
+    text-decoration: none; 
+}
+
+footer .social-icons a:hover {
+    color: #FFD700; 
+}
+
+
+
+@media (max-width: 1024px) {
+    .event-details {
+        flex-direction: column; 
+        gap: 1rem;
+    }
+
+    .event-details img {
+        max-width: 40%; 
+        height: auto; 
+    }
+
+    .event-description {
+        margin-left: 5%;
+
+        max-width: 90%; 
+        margin-top: 1rem; 
+        font-size: 0.8rem; 
+        
+    }
+
+    .event-info h1 {
+        font-size: 1.3rem; 
+    }
+
+    .event-info h3 {
+        font-size: 0.9rem; 
+    }
+}
+
+
+@media (max-width: 600px) {
+    .event-details {
+        padding: 1rem; 
+    }
+
+   
+
+    .event-info-wrapper {
+        flex-direction: column; 
+        align-items: center; 
+    }
+
+    .event-details img {
+        max-width: 80%; 
+    }
+
+    .event-description {
+        margin-top: 0.8rem; 
+        max-width: 90%; 
+    }
+
+    .event-info h1 {
+        margin-top: 1.2em;
+        font-size: 1.3rem; 
+    }
+
+    .event-info h3 {
+        font-size: 0.9rem; 
+    }
+}
