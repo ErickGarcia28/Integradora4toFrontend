@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', function () {
-    const pass = document.getElementById('pass');
+    const pass = document.getElementById('inputPass');
     const toggle = document.getElementById('toggle');
     const confirmPass = document.getElementById('confirmPass');
     const toggleConfirm = document.getElementById('toggleConfirm');
