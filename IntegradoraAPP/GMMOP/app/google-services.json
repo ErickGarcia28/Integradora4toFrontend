@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "941325957880",
+    "project_id": "gmmop-dc076",
+    "storage_bucket": "gmmop-dc076.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:941325957880:android:67114dfdc5e6bcae03590d",
+        "android_client_info": {
+          "package_name": "utez.edu.mx"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCOjA09dRgot2lJqOjuj3i4WTUAYZQV2wc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
