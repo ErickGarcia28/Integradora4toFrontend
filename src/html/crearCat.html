@@ -16,7 +16,7 @@
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&display=swap');
     </style>
-    <title>Crear Evento</title>
+    <title>Crear Categoría</title>
 </head>
 
 <body>
@@ -34,9 +34,6 @@
                     <li>
                         <a href="buscarEventoSuper.html">Buscar eventos</a>
                     </li>
-
-                  
-
                     <label for="check" class="close-menu"><i class="fas fa-times"></i></label>
                 </span>
                 <label for="check" class="open-menu"><i class="fas fa-bars"></i></label>
@@ -56,12 +53,12 @@
     
     
                 <div class="entry-area">
-                    <input type="text" name="usuario" required>
+                    <input id="nombreCategoriaInput" type="text" name="nombreCategoria" required>
                     <div class="labeline">Ingresa el nombre de la categoría</div>
                 </div>
 
                 <div class="entry-area">
-                    <input type="text" name="usuario" required>
+                    <input id="descripcionCategoriaInput"  type="text" name="descripcionCategoria" required>
                     <div class="labeline">Ingresa una descripción</div>
                 </div>
                 <p class="avise">Recuerda que después la podrás asignar a un evento...</p>  
@@ -87,13 +84,9 @@
     <p>&copy; 2024 EVENT-HUB. | GMMOP</p>
 </footer>
 
-
-
-  
-
-
-    <script src="/js/crearevento.js"></script>
-
+    <!-- <script src="/js/crearevento.js"></script> -->
+    <script src="../js/services/categoria_service.js" type="module"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </body>
 
 </html>

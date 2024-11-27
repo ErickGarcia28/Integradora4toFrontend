@@ -28,7 +28,7 @@ d.addEventListener("DOMContentLoaded", () => {
         const token = localStorage.getItem("authToken");
 
        
-        fetch(ruta + "/usuarios/save", {
+        fetch(ruta + "usuarios/save", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -44,8 +44,6 @@ d.addEventListener("DOMContentLoaded", () => {
         })
         .then(data => {
             console.log("Usuario registrado con éxito:", data);
-
-           
             Swal.fire({
                 icon: "success",
                 title: "Usuario registrado",
