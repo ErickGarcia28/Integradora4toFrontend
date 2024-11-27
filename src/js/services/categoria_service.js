@@ -76,7 +76,7 @@ d.addEventListener("DOMContentLoaded", () => {
         const $cards_container = d.getElementById("cards-container")
 
         // Ver categorías
-        fetch(ruta + "categorias/all-active", {
+        fetch(ruta + "categorias/all", {
             method: "GET",
             headers: {
                 "Authorization": `Bearer ${token}`,
@@ -93,18 +93,23 @@ d.addEventListener("DOMContentLoaded", () => {
             data.result.forEach(cat => {
                 let $card  = d.createElement("card");
                 $card.classList.add("card")
-                $card.innerHTML =  `
+                $card.innerHTML =  ` 
                 <div class="card-content">
                     <h3>${cat.nombre}</h3>
                     <p>${cat.descripcion}</p>
+                    <p><strong>Estado:</strong> ${cat.status ? "Activa" : "Deshabilitada"}</p>
                 </div>
                 <div class="more-info">
-                    <button id="btn-status-${cat.id}" class="btn-status" onclick="cambiarEstado(${cat.id}, ${cat.status})">
+                    <button id="btn-status-${cat.id}" class="btn-status ${cat.status ? "btn-red": "btn-green"} ">
                         ${cat.status ? 'DESHABILITAR' : 'ACTIVAR'}
                     </button>
-                    <button class="btn-details"><a href="actUsuario.html">EDITAR</a></button>
+                    <button class="btn-details"><a href="actCategoria.html">EDITAR</a></button>
                 </div>
-                `;
+            `;
+
+            const btnStatus = $card.querySelector(`#btn-status-${cat.id}`);
+            btnStatus.addEventListener("click", () => cambiarEstado(cat.id, cat.status));            
+
             $cards_container.appendChild($card);
             });
 
@@ -112,13 +117,15 @@ d.addEventListener("DOMContentLoaded", () => {
         .catch( error => {
             console.error('Error:', error);
         });
-        
-        const cambiarEstado = (categoriaId, estadoActual)=> {
+
+     
+        function cambiarEstado(categoriaId, estadoActual) {
             const token = localStorage.getItem("authToken");
-        
             
             const nuevoEstado = !estadoActual;
         
+            
+
             fetch(ruta + "categorias/change-status", {
                 method: "PUT",  
                 headers: {
@@ -139,13 +146,26 @@ d.addEventListener("DOMContentLoaded", () => {
             .then(data => {
                 console.log("Estado de la categoría actualizado:", data);
         
-               
                 const botonEstado = document.getElementById(`btn-status-${categoriaId}`);
                 if (nuevoEstado) {
                     botonEstado.innerHTML = 'DESHABILITAR';
+                    botonEstado.classList.add("btn-red")
                 } else {
                     botonEstado.innerHTML = 'ACTIVAR';
+                    botonEstado.classList.add("btn-green")
                 }
+         
+                window.location.reload();
+                
+                // Swal.fire({
+                //     icon: "success",
+                //     title: "Estado de Categoría",
+                //     text: "El estado de la categoría actualizado",
+                //     confirmButtonText: "Aceptar",
+                // }).then(() => {
+                //     window.location.reload();  
+                // });
+                
             })
             .catch(error => {
                 console.error('Error al cambiar el estado:', error);
@@ -158,5 +178,4 @@ d.addEventListener("DOMContentLoaded", () => {
                 });
             });
         }
-        
 });

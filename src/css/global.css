@@ -284,3 +284,10 @@ footer .wave#wave4{
 
     }
 }
+
+.btn-red {
+    background-color: #dc3545 !important;
+}
+.btn-green {
+    background-color: #28a745 !important;
+}

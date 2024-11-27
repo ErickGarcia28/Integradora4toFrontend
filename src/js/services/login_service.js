@@ -17,9 +17,6 @@ d.addEventListener("DOMContentLoaded", () => {
     const login = (event) => {
         event.preventDefault(); 
 
-        console.log("Correo:", $correoInput.value);
-        console.log("Contraseña:", $contraInput.value);
-
         fetch(ruta + "auth/login", {
             method: 'POST',
             headers: {
