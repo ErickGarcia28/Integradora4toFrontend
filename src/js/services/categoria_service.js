@@ -57,6 +57,7 @@ d.addEventListener("DOMContentLoaded", () => {
                     confirmButtonText: "Aceptar",
                 }).then(() => {
                     form.reset(); 
+                    window.location.href = "verCat.html";  
                 });
             })
             .catch(error => {
@@ -91,26 +92,35 @@ d.addEventListener("DOMContentLoaded", () => {
         .then(data => {
             console.log(data.result)
             data.result.forEach(cat => {
-                let $card  = d.createElement("card");
-                $card.classList.add("card")
-                $card.innerHTML =  ` 
-                <div class="card-content">
-                    <h3>${cat.nombre}</h3>
-                    <p>${cat.descripcion}</p>
-                    <p><strong>Estado:</strong> ${cat.status ? "Activa" : "Deshabilitada"}</p>
-                </div>
-                <div class="more-info">
-                    <button id="btn-status-${cat.id}" class="btn-status ${cat.status ? "btn-red": "btn-green"} ">
-                        ${cat.status ? 'DESHABILITAR' : 'ACTIVAR'}
-                    </button>
-                    <button class="btn-details"><a href="actCategoria.html">EDITAR</a></button>
-                </div>
-            `;
-
-            const btnStatus = $card.querySelector(`#btn-status-${cat.id}`);
-            btnStatus.addEventListener("click", () => cambiarEstado(cat.id, cat.status));            
-
-            $cards_container.appendChild($card);
+                let $card = d.createElement("card");
+                $card.classList.add("card");
+                $card.innerHTML = `
+                    <div class="card-content">
+                        <h3>${cat.nombre}</h3>
+                        <p>${cat.descripcion}</p>
+                        <p><strong>Estado:</strong> ${cat.status ? "Activa" : "Deshabilitada"}</p>
+                    </div>
+                    <div class="more-info">
+                        <button id="btn-status-${cat.id}" class="btn-status ${cat.status ? "btn-red" : "btn-green"} ">
+                            ${cat.status ? 'DESHABILITAR' : 'ACTIVAR'}
+                        </button>
+                        <button class="btn-details"><a href="actCategoria.html">EDITAR</a></button>
+                    </div>
+                `;
+            
+                const btnStatus = $card.querySelector(`#btn-status-${cat.id}`);
+                const btnDetails = $card.querySelector('.btn-details');
+            
+                btnStatus.addEventListener("click", () => cambiarEstado(cat.id, cat.status));
+               
+                btnDetails.addEventListener("click", () => {
+                    localStorage.setItem('categoryId', cat.id);  
+                    console.log(`Categoría con id ${cat.id} guardada en localStorage.`);
+                });
+            
+                if($cards_container){
+                    $cards_container.appendChild($card);
+                }
             });
 
         })
@@ -178,4 +188,117 @@ d.addEventListener("DOMContentLoaded", () => {
                 });
             });
         }
+
+        function renderCategoryInfo() {
+            const categoryId = localStorage.getItem('categoryId');
+            if (categoryId) {
+                console.log(`Recuperado id de categoría: ${categoryId}`);
+                fetch(ruta + "categorias/" + categoryId, {
+                    method: "GET",
+                    headers: {
+                        "Authorization": `Bearer ${token}`,
+                    },
+                })
+                .then(res => res.json())
+                .then(data => {         
+                    console.log(data);
+                    document.getElementById('nombreCategoriaInputUpdate').value = data.result.nombre;
+                    document.getElementById('descripcionCategoriaInputUpdate').value = data.result.descripcion;
+                })
+                .catch(error => {
+                    console.error('Error al obtener los datos de la categoría:', error);
+                });
+            } else {
+                console.error('No se encontró el id de la categoría en localStorage.');
+            }
+        }
+        
+        renderCategoryInfo();
+
+        const $btnActualizar = d.getElementById("actualizar-cat-btn");
+        $btnActualizar.addEventListener("click", actualizarCategoria);
+
+        function actualizarCategoria() {
+            const nombreCategoria = d.getElementById("nombreCategoriaInputUpdate").value.trim();
+            const descripcionCategoria = d.getElementById("descripcionCategoriaInputUpdate").value.trim();
+        
+            
+            if (!nombreCategoria || !descripcionCategoria) {
+                Swal.fire({
+                    icon: "error",
+                    title: "Campos vacíos",
+                    text: "Por favor, ingresa tanto el nombre como la descripción de la categoría.",
+                    confirmButtonText: "Aceptar"
+                });
+                return;
+            }
+        
+            const categoryId = localStorage.getItem('categoryId');
+            if (!categoryId) {
+                Swal.fire({
+                    icon: "error",
+                    title: "Error",
+                    text: "No se ha encontrado el ID de la categoría.",
+                    confirmButtonText: "Aceptar"
+                });
+                return;
+            }
+        
+            const categoria = {
+                id: categoryId,  
+                nombre: nombreCategoria,
+                descripcion: descripcionCategoria
+            };
+        
+            const token = localStorage.getItem("authToken");
+            if (!token) {
+                Swal.fire({
+                    icon: "error",
+                    title: "Error",
+                    text: "No se ha encontrado el token de autorización.",
+                    confirmButtonText: "Aceptar"
+                });
+                return;
+            }
+        
+            fetch(ruta + "categorias/update", {
+                method: "PUT",
+                headers: {
+                    "Content-Type": "application/json",
+                    "Authorization": `Bearer ${token}`,
+                },
+                body: JSON.stringify(categoria),
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error("Error al actualizar la categoría");
+                }
+                return response.json();
+            })
+            .then(data => {
+                console.log("Categoría actualizada con éxito:", data);
+        
+                Swal.fire({
+                    icon: "success",
+                    title: "Categoría actualizada",
+                    text: "La categoría ha sido actualizada correctamente.",
+                    confirmButtonText: "Aceptar"
+                }).then(() => {
+               
+                    window.location.href = "verCat.html";  
+                });
+            })
+            .catch(error => {
+                console.error("Error en la petición:", error);
+
+                Swal.fire({
+                    icon: "error",
+                    title: "Error al actualizar la categoría",
+                    text: "Ocurrió un problema al actualizar la categoría. Intenta nuevamente.",
+                    confirmButtonText: "Reintentar"
+                });
+            });
+        }
+        
+
 });

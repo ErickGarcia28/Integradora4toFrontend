@@ -4,7 +4,6 @@ import { d, ruta } from '../constantes.js';
 const $correoInput = d.getElementById("inputLogin");
 const $contraInput = d.getElementById("inputPass");
 
-
 function parseJwt(token) {
     const base64Url = token.split('.')[1];
     const base64 = decodeURIComponent(atob(base64Url).split('').map(c => {

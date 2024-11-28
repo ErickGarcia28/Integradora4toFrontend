@@ -16,7 +16,7 @@
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&display=swap');
     </style>
-    <title>Crear Categoría</title>
+    <title>Actualizar Categoría</title>
 </head>
 
 <body>
@@ -47,24 +47,20 @@
             <div class="title">Actualizar categoría</div>
             <form id="actualizarCategoriaForm">    
                 <div class="entry-area">
-                    <input id="nombreCategoriaInput" type="text" name="nombreCategoria" required>
+                    <input id="nombreCategoriaInputUpdate" type="text" name="nombreCategoria" required>
                     <div class="labeline">Nombre de la categoría</div>
                 </div>
 
                 <div class="entry-area">
-                    <input id="descripcionCategoriaInput"  type="text" name="descripcionCategoria" required>
+                    <input id="descripcionCategoriaInputUpdate"  type="text" name="descripcionCategoria" required>
                     <div class="labeline">Descripción</div>
                 </div>
-                <p class="avise">Recuerda que después la podrás asignar a un evento...</p>  
-    
-                
-                <button type="submit" class="button">ACTUALIZAR</button>
+                <p class="avise">Recuerda que después la podrás asignar a un evento...</p>         
+                <button id="actualizar-cat-btn" type="button" class="button">ACTUALIZAR</button>
             </form>
-            
         </div>
     </div>
 </main>
-
 <footer>
     <div class="waves">
         <div class="wave" id="wave1"></div>
@@ -72,15 +68,9 @@
         <div class="wave" id="wave3"></div>
         <div class="wave" id="wave4"></div>
     </div>
-
-
-
     <p>&copy; 2024 EVENT-HUB. | GMMOP</p>
 </footer>
-
-    <!-- <script src="/js/crearevento.js"></script> -->
-    <script src="../js/services/categoria_service.js" type="module"></script>ks
+    <script src="../js/services/categoria_service.js" type="module"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </body>
-
 </html>

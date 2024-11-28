@@ -16,6 +16,14 @@ body{
 
 }
 
+/* .labeline{
+    z-index: 1;
+} */
+
+.swal2-container {
+    z-index: 9999 !important;  /* Usa un valor alto para asegurar que se muestre encima */
+}
+
 
 .nav-bar{
     width: 100%;
