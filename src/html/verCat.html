@@ -53,7 +53,6 @@
         </form>
     </div>
 
-    
     <section class="event-cards">
         
         <div class="cards-container" id="cards-container">
@@ -116,25 +115,25 @@
     const cardsContainer = document.querySelector(".cards-container");
     const cards = document.querySelectorAll(".card");
 
-    // Crea un elemento para el mensaje de "No se encontraron coincidencias"
+   
     const noResultsMessage = document.createElement("div");
     noResultsMessage.textContent = "No se encontraron coincidencias, intente de nuevo.";
-    noResultsMessage.classList.add("no-results-message"); // Clase CSS para el estilo
-    noResultsMessage.style.display = "none"; // Ocultarlo por defecto
+    noResultsMessage.classList.add("no-results-message"); 
+    noResultsMessage.style.display = "none"; 
     cardsContainer.appendChild(noResultsMessage);
 
-    // Escucha el evento 'input' en el campo de búsqueda
+   
     searchInput.addEventListener("input", () => {
-        const query = searchInput.value.toLowerCase().trim(); // Convierte a minúsculas y elimina espacios
+        const query = searchInput.value.toLowerCase().trim();
         let hasVisibleCards = false;
 
         cards.forEach(card => {
-            const cardContent = card.innerText.toLowerCase(); // Convierte el contenido de la tarjeta a minúsculas
+            const cardContent = card.innerText.toLowerCase();
             if (cardContent.includes(query)) {
-                card.style.display = ""; // Muestra la tarjeta si coincide
+                card.style.display = "";
                 hasVisibleCards = true;
             } else {
-                card.style.display = "none"; // Oculta la tarjeta si no coincide
+                card.style.display = "none";
             }
         });
 
@@ -148,10 +147,5 @@
 });
     </script>
 </body>
-
-
-    
-    
-
 </body>
 </html>
