@@ -53,5 +53,13 @@ main {
 }
 
 
+@media(max-width: 500px){
+    .categoria-img img{
+       
+        max-width: 300px;
+        margin-bottom: 2em;
+    }
+}
+
 
 
