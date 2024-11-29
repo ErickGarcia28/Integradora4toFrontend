@@ -1,8 +1,11 @@
 import { d, ruta } from '../constantes.js';
 
-const token = localStorage.getItem("authToken");
 
 d.addEventListener("DOMContentLoaded", () => {
+    const token = localStorage.getItem("authToken");
+    if(!token){
+        w.location.href="login.html"
+      }
     const form = d.getElementById("loginForm");
 
     if(form){
@@ -166,16 +169,6 @@ d.addEventListener("DOMContentLoaded", () => {
                 }
          
                 window.location.reload();
-                
-                // Swal.fire({
-                //     icon: "success",
-                //     title: "Estado de Categoría",
-                //     text: "El estado de la categoría actualizado",
-                //     confirmButtonText: "Aceptar",
-                // }).then(() => {
-                //     window.location.reload();  
-                // });
-                
             })
             .catch(error => {
                 console.error('Error al cambiar el estado:', error);
@@ -189,7 +182,7 @@ d.addEventListener("DOMContentLoaded", () => {
             });
         }
 
-        function renderCategoryInfo() {
+        function cargarInfoCategoria() {
             const categoryId = localStorage.getItem('categoryId');
             if (categoryId) {
                 console.log(`Recuperado id de categoría: ${categoryId}`);
@@ -213,7 +206,7 @@ d.addEventListener("DOMContentLoaded", () => {
             }
         }
         
-        renderCategoryInfo();
+        cargarInfoCategoria();
 
         const $btnActualizar = d.getElementById("actualizar-cat-btn");
         $btnActualizar.addEventListener("click", actualizarCategoria);

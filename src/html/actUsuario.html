@@ -59,38 +59,27 @@
     <div class="card">
         <div class="title">Actualizar usuario</div>
         <form id="loginForm">
-
-
             <div class="entry-area">
-                <input type="text" name="usuario" required>
+                <input  id="inputNombreRegistro"  type="text" name="usuario" required>
                 <div class="labeline">Ingresa un nombre</div>
             </div>
-
-
             <div class="entry-area">
-                <input type="text" name="usuario-ape" required>
+                <input id="inputApellidosRegistro"  type="text" name="usuario-ape" required>
                 <div class="labeline">Ingresa los apellidos</div>
             </div>
 
             <div class="entry-area">
-                <input type="number" name="usuario-tel" required>
+                <input  id="inputTelefonoRegistro" type="number" name="usuario-tel" required>
                 <div class="labeline">Ingresa un teléfono</div>
             </div>
 
 
             <div class="entry-area">
-                <input type="email" name="usuario-email" required>
+                <input id="inputCorreoRegistro"  type="email" name="usuario-email" required>
                 <div class="labeline">Ingresa el correo</div>
             </div>
-
-
-            <div class="entry-area">
-                <input type="password" id="pass" name="password" required>
-                <div class="labeline">Ingresa la contraseña</div>
-                <span id="toggle" onclick="showHide();"></span>
-            </div>
             
-            <button type="submit" class="button">ACTUALIZAR</button>
+            <button id="actualizar-usuario-btn" type="button" class="button">ACTUALIZAR</button>
         </form>
        
     </div>
@@ -109,11 +98,12 @@
     <p>&copy; 2024 EVENT-HUB. | GMMOP</p>
 </footer>
 
-<script src="../js/register.js"></script>
+<script src="../js/services/usuario_service.js"></script>
+<!-- <script src="../js/carga/cargar_usuario.js" type="module"></script> -->
+
+<script src="../js/services/usuario_service.js" type="module"></script>
 
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-<script src="../js/login.js"></script>
-    
 </body>
 
 

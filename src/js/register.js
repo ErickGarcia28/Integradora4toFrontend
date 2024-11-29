@@ -5,7 +5,9 @@ document.addEventListener('DOMContentLoaded', function () {
     const toggleConfirm = document.getElementById('toggleConfirm');
 
     toggle.addEventListener('click', showHide);
-    toggleConfirm.addEventListener('click', showHideConfirm);
+    if(toggleConfirm){
+        toggleConfirm.addEventListener('click', showHideConfirm);
+    }
 
     function showHide() {
         if (pass.type === 'password') {
