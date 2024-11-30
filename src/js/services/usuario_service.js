@@ -7,6 +7,72 @@ d.addEventListener("DOMContentLoaded", () => {
     w.location.href = "login.html";
   }
 
+  const $registerForm = document.getElementById("registerForm");
+  
+  if ($registerForm) {
+    $registerForm.addEventListener("submit", function (event) {
+      event.preventDefault(); // Evita que el formulario se envíe de forma tradicional
+
+      // Recopilamos los valores del formulario
+      const nombre = document.getElementById("inputNombreRegistro").value;
+      const apellido = document.getElementById("inputApellidosRegistro").value;
+      const telefono = document.getElementById("inputTelefonoRegistro").value;
+      const correo = document.getElementById("inputCorreoRegistro").value;
+      const contrasena = document.getElementById("inputContraRegistro").value;
+
+      // Creamos el objeto UsuarioDTO
+      const usuarioDTO = {
+          nombre: nombre,
+          apellido: apellido,
+          correoElectronico: correo,
+          telefono: parseInt(telefono), 
+          contrasena: contrasena,
+          status: true
+      };
+
+      // Realizamos la petición POST para registrar el usuario
+      fetch(ruta+'usuarios/save', {  // Cambia la URL a la correcta de tu backend
+          method: 'POST',
+          headers: {
+              "Content-Type": "application/json",  // Indica que estamos enviando JSON
+              "Authorization": `Bearer ${token}`  // Usamos el token obtenido previamente
+          },
+          body: JSON.stringify(usuarioDTO)  // Convertimos el objeto a JSON
+      })
+      .then(response => response.json())  // Convertimos la respuesta a formato JSON
+      .then(data => {
+        console.log(data);
+        if (data.type === "SUCCESS") {
+            Swal.fire({
+                title: '¡Éxito!',
+                text: 'Usuario registrado correctamente.',
+                icon: 'success',
+                confirmButtonText: 'Aceptar'
+            }).then(() => {
+                document.getElementById("registerForm").reset(); 
+                w.location.href="verUsuarios.html"
+            });
+        } else {
+            Swal.fire({
+                title: 'Error',
+                text: data.mensaje || 'Hubo un problema al registrar el usuario.',
+                icon: 'error',
+                confirmButtonText: 'Aceptar'
+            });
+        }
+      })
+      .catch(error => {
+          console.error('Error al registrar el usuario:', error);
+          Swal.fire({
+              title: 'Error',
+              text: 'Hubo un problema con la solicitud. Por favor, inténtalo más tarde.',
+              icon: 'error',
+              confirmButtonText: 'Aceptar'
+          });
+      });
+    });
+  }
+
   
 
   const $users_container = d.getElementById("usuarios_container");
@@ -125,17 +191,16 @@ d.addEventListener("DOMContentLoaded", () => {
         fetch(ruta + "usuarios/" + usuarioId, {
             method: "GET",
             headers: {
+                "Content-Type": "application/json",
                 "Authorization": `Bearer ${token}`,
             },
         })
         .then(res => res.json())
         .then(data => {         
-            console.log("INFORMACIOON USUARIOOOO",  data);
-            document.getElementById('inputNombreRegistro').value = data.result.nombre;
-            document.getElementById('inputApellidosRegistro').value = data.result.apellido;
-            document.getElementById('inputTelefonoRegistro').value = data.result.telefono;
-            document.getElementById('inputCorreoRegistro').value = data.result.correoElectronico;
-            document.getElementById('inputContraRegistro').value = data.result.contrasena;
+            document.getElementById('inputNombreActualizacion').value = data.result.nombre;
+            document.getElementById('inputApellidosActualizacion').value = data.result.apellido;
+            document.getElementById('inputTelefonoActualizacion').value = data.result.telefono;
+            document.getElementById('inputCorreoActualizacion').value = data.result.correoElectronico;
         })
         .catch(error => {
             console.error('Error al obtener los datos del usuario:', error);
@@ -151,10 +216,10 @@ d.addEventListener("DOMContentLoaded", () => {
  }
  
  function actualizarUsuario() {
-   const nombre = document.getElementById("inputNombreRegistro").value.trim();
-   const apellido = document.getElementById("inputApellidosRegistro").value.trim();
-   const telefono = document.getElementById("inputTelefonoRegistro").value.trim();
-   const correoElectronico = document.getElementById("inputCorreoRegistro").value.trim();
+   const nombre = document.getElementById("inputNombreActualizacion").value.trim();
+   const apellido = document.getElementById("inputApellidosActualizacion").value.trim();
+   const telefono = document.getElementById("inputTelefonoActualizacion").value.trim();
+   const correoElectronico = document.getElementById("inputCorreoActualizacion").value.trim();
  
    if (!nombre || !apellido || !telefono || !correoElectronico) {
      Swal.fire({

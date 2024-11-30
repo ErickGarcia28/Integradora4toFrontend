@@ -4,9 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Buscar eventos</title>
+    <link rel="stylesheet" href="../css/consVens.css">
     <link rel="stylesheet" href="../css/buscareventos.css">
     <link rel="stylesheet" href="../css/global.css">
    
+
     <link rel="stylesheet"href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&icon_names=search" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
     integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
@@ -27,16 +29,12 @@
                         <li>
                             <a href="principalAdmin.html">principal</a>
                         </li>
-                        
                         <li>
                             <a href="crearEvento.html">CREAR EVENTOS</a>
                         </li>
-                       
-                        
                         <label for="check" class="close-menu"><i class="fas fa-times"></i></label>
                     </span>
                     <label for="check" class="open-menu"><i class="fas fa-bars"></i></label>
-               
             </ul>
         </nav>
     </header>
@@ -53,106 +51,7 @@
 
     
     <section class="event-cards">
-       
-    
         <div class="cards-container">
-            <div class="card">
-                <img src="/img/fiestaDM.jpeg" alt="Evento 1">
-                <div class="card-content">
-                    <h3>Día de Muertos</h3>
-                    <p>Fecha: 12 Octubre 2024, 20:00</p>
-                    <p>Lugar: Cuernavaca Zócalo</p>
-                </div>
-                <div class="more-info">
-                    <button class="btn-details"><a href="detallesEventoAdmin.html">DETALLES</a></button>
-                </div>
-            </div>
-    
-            <div class="card">
-                <img src="/img/teatro.jpeg" alt="Evento 2">
-                <div class="card-content">
-                    <h3>Orquesta Musical</h3>
-                    <p>Fecha: 22 Octubre 2024, 20:00</p>
-                    <p>Lugar: Teatro Ocampo</p>
-                </div>
-                <div class="more-info">
-                    <button class="btn-details"><a href="detallesEventoAdmin.html">DETALLES</a></button>
-                </div>
-            </div>
-    
-            <div class="card">
-                <img src="/img/fiestaDM.jpeg" alt="Evento 3">
-                <div class="card-content">
-                    <h3>Día de Muertos</h3>
-                    <p>Fecha: 12 Octubre 2024, 20:00</p>
-                    <p>Lugar: Cuernavaca Zócalo</p>
-                </div>
-                <div class="more-info">
-                    <button class="btn-details"><a href="detallesEventoAdmin.html">DETALLES</a></button>
-                </div>
-            </div>
-    
-            <div class="card">
-                <img src="/img/teatro.jpeg" alt="Evento 4">
-                <div class="card-content">
-                    <h3>Orquesta Musical</h3>
-                    <p>Fecha: 22 Octubre 2024, 20:00</p>
-                    <p>Lugar: Teatro Ocampo</p>
-                </div>
-                <div class="more-info">
-                    <button class="btn-details"><a href="detallesEventoAdmin.html">DETALLES</a></button>
-                </div>
-            </div>
-
-
-
-            <div class="card">
-                <img src="/img/fiestaDM.jpeg" alt="Evento 1">
-                <div class="card-content">
-                    <h3>Día de Muertos</h3>
-                    <p>Fecha: 12 Octubre 2024, 20:00</p>
-                    <p>Lugar: Cuernavaca Zócalo</p>
-                </div>
-                <div class="more-info">
-                    <button class="btn-details"><a href="detallesEventoAdmin.html">DETALLES</a></button>
-                </div>
-            </div>
-    
-            <div class="card">
-                <img src="/img/teatro.jpeg" alt="Evento 2">
-                <div class="card-content">
-                    <h3>Orquesta Musical</h3>
-                    <p>Fecha: 22 Octubre 2024, 20:00</p>
-                    <p>Lugar: Teatro Ocampo</p>
-                </div>
-                <div class="more-info">
-                    <button class="btn-details"><a href="detallesEventoAdmin.html">DETALLES</a></button>
-                </div>
-            </div>
-    
-            <div class="card">
-                <img src="/img/fiestaDM.jpeg" alt="Evento 3">
-                <div class="card-content">
-                    <h3>Día de Muertos</h3>
-                    <p>Fecha: 12 Octubre 2024, 20:00</p>
-                    <p>Lugar: Cuernavaca Zócalo</p>
-                </div>
-                <div class="more-info">
-                    <button class="btn-details"><a href="detallesEventoAdmin.html">DETALLES</a></button>
-                </div>
-            </div>
-    
-            <div class="card">
-                <img src="/img/teatro.jpeg" alt="Evento 4">
-                <div class="card-content">
-                    <h3>Orquesta Musical</h3>
-                    <p>Fecha: 22 Octubre 2024, 20:00</p>
-                    <p>Lugar: Teatro Ocampo</p>
-                </div>
-                <div class="more-info">
-                    <button class="btn-details"><a href="detallesEventoAdmin.html">DETALLES</a></button>
-                </div>
-            </div>
         </div>
     </section>
     
@@ -265,8 +164,9 @@
     </script>
 
 
-    
-  
+    <script src="../js/services/evento_service.js" type="module"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
 </body>
 </html>
 </body>
