@@ -71,6 +71,17 @@ body{
     text-transform: uppercase;
 }
 
+.menu li button{
+    display: inline-block;
+    text-decoration: none;
+    color: var(--color3);
+    text-align: center;
+    transition: 0.3s ease-in-out;
+    position: relative;
+    text-transform: uppercase;
+}
+
+
 .menu li a::after{
     content: "";
     position: absolute;
