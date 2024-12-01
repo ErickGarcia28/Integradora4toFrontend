@@ -3,9 +3,6 @@ import { d, ruta, w, c } from "../constantes.js";
 d.addEventListener("DOMContentLoaded", () => {
   const token = localStorage.getItem("authToken");
 
-  if (!token) {
-    w.location.href = "login.html";
-  }
 
   const cardsContainer = document.querySelector(".cards-container");
   const cargarEventosOrdenados = () => {
@@ -73,8 +70,7 @@ d.addEventListener("DOMContentLoaded", () => {
     fetch(ruta + "eventos/" + eventoId, {
       method: "GET",
       headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json"
       },
     })
       .then((res) => res.json())

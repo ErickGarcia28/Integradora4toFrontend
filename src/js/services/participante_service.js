@@ -3,10 +3,6 @@ import { d, ruta, w } from "../constantes.js";
 d.addEventListener("DOMContentLoaded", () => {
   const token = localStorage.getItem("authToken");
 
-  if (!token) {
-    w.location.href = "login.html";
-  }
-
   const $formRegistro = d.getElementById("registroParticipanteForm");
   const eventoId = localStorage.getItem("eventoDetalles");
 
@@ -68,8 +64,7 @@ d.addEventListener("DOMContentLoaded", () => {
         const response = await fetch(`${ruta}participantes/save`, {
           method: "POST",
           headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json"
           },
           body: JSON.stringify(participante),
         });
@@ -198,7 +193,7 @@ d.addEventListener("DOMContentLoaded", () => {
     }
   };
 
-  if (!w.location.href.includes("actPart.html")) {
+  if (w.location.href.includes("actPart.html")) {
     cargarParticipantes();
   }
 

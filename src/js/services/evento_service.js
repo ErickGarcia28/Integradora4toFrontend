@@ -52,6 +52,15 @@ d.addEventListener("DOMContentLoaded", () => {
         return;
       }
 
+      if (!usuarioId) {
+        Swal.fire({
+          icon: "error",
+          title: "Error",
+          text: "No se encontró el ID del usuario. Por favor, inicia sesión nuevamente.",
+        });
+        return; // Detener la ejecución si no se encuentra el usuario
+      }
+
       const eventData = {
         nombre: eventName,
         descripcion: eventDesc,
@@ -60,6 +69,7 @@ d.addEventListener("DOMContentLoaded", () => {
         lugar: eventAddress,
         categoriaId: parseInt(eventCat),
         status: true,
+        usuarioId: parseInt(usuarioId)
       };
 
       console.log(eventData);
@@ -418,6 +428,7 @@ d.addEventListener("DOMContentLoaded", () => {
       lugar: direccion,
       categoriaId: parseInt(categoriaId),
       status: status,
+      usuarioId: usuarioId
     };
 
     const token = localStorage.getItem("authToken");
