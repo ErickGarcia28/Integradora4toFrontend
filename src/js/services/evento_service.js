@@ -480,7 +480,9 @@ d.addEventListener("DOMContentLoaded", () => {
       });
   }
 
-  cargarInfoEvento();
+  if(w.location.href.includes("actEvento.html")){
+    cargarInfoEvento();
+  }
 
   const formActualizar = d.getElementById("updateEventForm");
   if (formActualizar) {
