@@ -193,9 +193,11 @@ d.addEventListener("DOMContentLoaded", () => {
     }
   };
 
-  if (w.location.href.includes("actPart.html")) {
-    cargarParticipantes();
-  }
+  
+    if(w.location.href.includes("verPart.html")){
+      cargarParticipantes();
+    }
+  
 
   function cambiarEstadoParticipante(participanteId, estadoActual) {
     const token = localStorage.getItem("authToken");
