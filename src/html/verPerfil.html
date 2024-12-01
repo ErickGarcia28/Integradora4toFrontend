@@ -53,16 +53,24 @@
         <div class="card">
             <h1 class="card_title">Tu Perfil</h1>
             <div class="profile-info">
-                <label for="nombre">Nombre:</label>
-                <p id="nombre">Juan Pérez</p>
-                
-                <label for="email">Email:</label>
-                <p id="email">juan.perez@example.com</p>
-
-                <label for="telefono">Teléfono:</label>
-                <p id="telefono">+123 456 7890</p>
+                <label for="inputNombre">Nombre:</label>
+                <input id="inputNombre" type="text" value="Juan Pérez" disabled>
+                <br>
+                <br>
+                <label for="inputApellido">Apellido:</label>
+                <input id="inputApellido" type="text" value="Juan Pérez" disabled>
+                <br>
+                <br>
+                <label for="inputEmail">Email:</label>
+                <input id="inputEmail" type="email" value="juan.perez@example.com" disabled>
+                <br>
+                <br>
+            
+                <label for="inputTelefono">Teléfono:</label>
+                <input id="inputTelefono" type="tel" value="+123 456 7890" disabled>
             </div>
-            <button class="edit-button" onclick="editProfile()">Editar Datos</button>
+            <button id="editProfileButton" class="edit-button">Editar Datos</button>
+            <button id="saveProfileButton" class="save-button" style="display: none;">Guardar</button>            
         </div>
     </div>
 </main>
@@ -78,9 +86,7 @@
 
         <p>&copy; 2024 EVENT-HUB. | GMMOP</p>
     </footer>
-
-    <script>
-  
-    </script>
+    <script src="../js/services/perfil_service.js" type="module"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </body>
 </html>

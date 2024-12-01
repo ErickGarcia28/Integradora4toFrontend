@@ -17,8 +17,6 @@ d.addEventListener("DOMContentLoaded", () => {
   const token = localStorage.getItem("authToken");
   const usuarioId = localStorage.getItem("usuarioId");
 
-  // YA RECUPERAMOS EL USER ID, FALTA AHCER LA PETICION PERSONALIZADA PARA OBTENER LOS EVENTOS RELACIONADOS CON ESTE USUARIO
-
   console.log("Usuario id " + usuarioId);
 
   if (!token) {
@@ -59,9 +57,9 @@ d.addEventListener("DOMContentLoaded", () => {
         descripcion: eventDesc,
         fecha: eventDate,
         hora: eventTime,
-        lugar: eventAddress, // Lugar
-        categoriaId: parseInt(eventCat), // Convertir a número entero
-        status: true, // Agregar el campo status
+        lugar: eventAddress,
+        categoriaId: parseInt(eventCat),
+        status: true,
       };
 
       console.log(eventData);
@@ -142,8 +140,6 @@ d.addEventListener("DOMContentLoaded", () => {
       });
   }
 
-  // CARGA DE EVENTOS
-  // Función para cargar todos los eventos
   const loadEvents = () => {
     fetch(ruta + "eventos/all-by-user-id/" + usuarioId, {
       method: "GET",
@@ -161,11 +157,9 @@ d.addEventListener("DOMContentLoaded", () => {
       .then((data) => {
         console.log(data);
         if (data.result && data.result.length > 0) {
-          // Llamar a la función para mostrar los eventos
           displayEvents(data.result);
         } else {
           console.log("No se encontraron eventos.");
-          // Aquí podrías mostrar un mensaje si no hay eventos
         }
       })
       .catch((error) => {
@@ -180,10 +174,9 @@ d.addEventListener("DOMContentLoaded", () => {
 
   const displayEvents = (events) => {
     const cardsContainer = d.querySelector(".cards-container");
-    cardsContainer.innerHTML = ""; // Limpiar cualquier tarjeta existente
+    cardsContainer.innerHTML = "";
 
     events.forEach((event) => {
-      // Definir el texto del botón dependiendo del estado actual del evento
       const statusButtonText = event.status ? "Desactivar" : "Activar";
 
       const cardHTML = `
@@ -212,16 +205,15 @@ d.addEventListener("DOMContentLoaded", () => {
           </div>
         </div>
       `;
-      cardsContainer.innerHTML += cardHTML; // Agregar la tarjeta al contenedor
+      cardsContainer.innerHTML += cardHTML;
     });
 
-    // Agregar el evento de click para el botón de cambio de estado
     const statusButtons = d.querySelectorAll(".btn-toggle-status");
     statusButtons.forEach((button) => {
       button.addEventListener("click", (e) => {
         const eventId = e.target.getAttribute("data-event-id");
         const currentStatus = JSON.parse(e.target.getAttribute("data-status"));
-        cambiarEstadoUsuario(eventId, currentStatus); // Llamar a la función para cambiar el estado
+        cambiarEstadoUsuario(eventId, currentStatus);
       });
     });
 
@@ -229,22 +221,23 @@ d.addEventListener("DOMContentLoaded", () => {
     editButtons.forEach((button) => {
       button.addEventListener("click", (e) => {
         const eventId = button.getAttribute("data-event-id");
-        localStorage.setItem("eventoId", eventId); // Guardamos el ID del evento
-        localStorage.setItem("eventoDetalles", eventId); // Guardamos el ID del evento
-      });
-    });
-    
-    const detallesButtons = d.querySelectorAll(".btn-details");
-    detallesButtons.forEach((detalleBtn) => {
-      detalleBtn.addEventListener("click", (e) => {
-        e.preventDefault(); // Prevenir la redirección automática
-        const eventId = detalleBtn.closest(".card").getAttribute("data-event-id");
-        localStorage.setItem("eventoId", eventId); // Guardar ID del evento en el localStorage
-        localStorage.setItem("eventoDetalles", eventId); // Guardar detalles del evento
-        window.location.href = "detallesEventoAdmin.html"; // Redirigir a la página de detalles
+        localStorage.setItem("eventoId", eventId);
+        localStorage.setItem("eventoDetalles", eventId);
       });
     });
 
+    const detallesButtons = d.querySelectorAll(".btn-details");
+    detallesButtons.forEach((detalleBtn) => {
+      detalleBtn.addEventListener("click", (e) => {
+        e.preventDefault();
+        const eventId = detalleBtn
+          .closest(".card")
+          .getAttribute("data-event-id");
+        localStorage.setItem("eventoId", eventId);
+        localStorage.setItem("eventoDetalles", eventId);
+        window.location.href = "detallesEventoAdmin.html";
+      });
+    });
   };
 
   if (w.location.href.includes("buscarEventosAdmin.html")) {
@@ -252,16 +245,14 @@ d.addEventListener("DOMContentLoaded", () => {
   }
 
   const cambiarEstadoUsuario = (eventId, currentStatus) => {
-    // Cambiar el estado: si está activo (true), lo ponemos a inactivo (false), y viceversa
     const newStatus = !currentStatus;
 
-    // Crear el cuerpo de la solicitud con los datos del evento
     const eventData = {
       id: parseInt(eventId),
-      status: newStatus, // Cambiar el estado
+      status: newStatus,
     };
     console.log(eventData);
-    // Enviar la solicitud PUT para actualizar el estado del evento
+
     fetch(ruta + "eventos/change-status", {
       method: "PUT",
       headers: {
@@ -305,13 +296,11 @@ d.addEventListener("DOMContentLoaded", () => {
       });
   };
 
-  // Función que carga los datos del evento en el formulario
   function cargarInfoEvento() {
-    const eventoId = localStorage.getItem("eventoId"); // Recuperamos el ID del evento
+    const eventoId = localStorage.getItem("eventoId");
     if (eventoId) {
       console.log(`Recuperado id de evento: ${eventoId}`);
 
-      // Realizamos una solicitud GET para obtener los detalles del evento
       const token = localStorage.getItem("authToken");
       if (!token) {
         w.location.href = "login.html";
@@ -327,7 +316,6 @@ d.addEventListener("DOMContentLoaded", () => {
       })
         .then((res) => res.json())
         .then((data) => {
-          // Llenamos el formulario con los datos del evento
           document.getElementById("eventNameUpdate").value = data.result.nombre;
           document.getElementById("eventDesUpdate").value =
             data.result.descripcion;
@@ -340,8 +328,7 @@ d.addEventListener("DOMContentLoaded", () => {
             ? "true"
             : "false";
 
-          // Llenar el campo de categorías si es necesario
-          cargarCategorias(); // Asumo que tienes esta función para cargar las categorías
+          cargarCategorias();
         })
         .catch((error) => {
           console.error("Error al obtener los datos del evento:", error);
@@ -352,11 +339,10 @@ d.addEventListener("DOMContentLoaded", () => {
         title: "Error",
         text: "No se ha encontrado el ID del evento.",
       });
-      w.location.href = "buscarEventosAdmin.html"; // Redirigir si no hay ID de evento
+      w.location.href = "buscarEventosAdmin.html";
     }
   }
 
-  // Función para cargar las categorías activas (puedes adaptarla si ya tienes esta función)
   function cargarCategorias() {
     const token = localStorage.getItem("authToken");
     const categorySelect = d.getElementById("categorySelectUpdate");
@@ -381,11 +367,10 @@ d.addEventListener("DOMContentLoaded", () => {
       });
   }
 
-  // Función que se ejecuta cuando se envía el formulario
   function actualizarEvento(event) {
-    event.preventDefault(); // Prevenir el comportamiento por defecto del formulario
+    event.preventDefault();
 
-    const eventoId = localStorage.getItem("eventoId"); // Recuperamos el ID del evento desde localStorage
+    const eventoId = localStorage.getItem("eventoId");
     if (!eventoId) {
       Swal.fire({
         icon: "error",
@@ -395,7 +380,6 @@ d.addEventListener("DOMContentLoaded", () => {
       return;
     }
 
-    // Obtenemos los valores del formulario
     const nombre = document.getElementById("eventNameUpdate").value.trim();
     const descripcion = document.getElementById("eventDesUpdate").value.trim();
     const direccion = document
@@ -409,7 +393,6 @@ d.addEventListener("DOMContentLoaded", () => {
     const status =
       document.getElementById("eventStatusUpdate").value === "true";
 
-    // Verificamos que todos los campos estén completos
     if (
       !nombre ||
       !descripcion ||
@@ -426,7 +409,6 @@ d.addEventListener("DOMContentLoaded", () => {
       return;
     }
 
-    // Creamos el objeto con los datos actualizados
     const evento = {
       id: eventoId,
       nombre: nombre,
@@ -434,11 +416,10 @@ d.addEventListener("DOMContentLoaded", () => {
       fecha: fecha,
       hora: hora,
       lugar: direccion,
-      categoriaId: parseInt(categoriaId), // Convertimos el ID de la categoría a número
+      categoriaId: parseInt(categoriaId),
       status: status,
     };
 
-    // Obtenemos el token de autenticación
     const token = localStorage.getItem("authToken");
     if (!token) {
       Swal.fire({
@@ -449,7 +430,6 @@ d.addEventListener("DOMContentLoaded", () => {
       return;
     }
 
-    // Realizamos la solicitud PUT para actualizar el evento
     fetch(ruta + "eventos/update", {
       method: "PUT",
       headers: {
@@ -471,12 +451,12 @@ d.addEventListener("DOMContentLoaded", () => {
           text: "El evento ha sido actualizado correctamente.",
           confirmButtonText: "Aceptar",
           customClass: {
-            title: "text-center", // Centra el título
-            content: "text-center", // Centra el contenido
-            confirmButton: "btn-center", // Centra el botón
+            title: "text-center",
+            content: "text-center",
+            confirmButton: "btn-center",
           },
         }).then(() => {
-          w.location.href = "buscarEventosAdmin.html"; // Redirigimos al listado de eventos
+          w.location.href = "buscarEventosAdmin.html";
         });
       })
       .catch((error) => {
@@ -489,11 +469,8 @@ d.addEventListener("DOMContentLoaded", () => {
       });
   }
 
-  // Cargar los datos del evento cuando se cargue la página
+  cargarInfoEvento();
 
-  cargarInfoEvento(); // Llamamos para cargar los datos del evento
-
-  // Asignar el evento al formulario
   const formActualizar = d.getElementById("updateEventForm");
   if (formActualizar) {
     formActualizar.addEventListener("submit", actualizarEvento);

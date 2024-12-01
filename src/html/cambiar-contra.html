@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cambio de Contraseña</title>
+    <link rel="stylesheet" href="../css/global.css">
+    <link rel="stylesheet" href="../css/sendEmail.css">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&display=swap" />
+</head>
+
+<body>
+    <div class="container">
+        <div class="card">
+            <div class="title">Cambio de Contraseña</div>
+            <form id="cambioDeContra">
+                <div class="entry-area">
+                    <input id="nuevaContrasena" type="password" name="nuevaContrasena" minlength="8" required>
+                    <div class="labeline">Nueva Contraseña</div>
+                </div>
+                <div class="entry-area">
+                    <input id="confirmarContrasena" type="password" name="confirmarContrasena" minlength="8" required>
+                    <div class="labeline">Confirma la Contraseña</div>
+                </div>
+                <button type="submit" class="button">Cambiar Contraseña</button>
+            </form>
+        </div>
+    </div>
+
+    <footer>
+        <div class="waves">
+            <div class="wave" id="wave1"></div>
+            <div class="wave" id="wave2"></div>
+            <div class="wave" id="wave3"></div>
+            <div class="wave" id="wave4"></div>
+        </div>
+        <p>&copy; 2024 EVENT-HUB. | GMMOP</p>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="../js/services/recuperar_contra_service.js" type="module"></script>
+</body>
+
+</html>

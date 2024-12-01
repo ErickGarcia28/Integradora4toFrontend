@@ -4,7 +4,7 @@
 <head>
     <meta charset='utf-8'>
     <meta http-equiv='X-UA-Compatible' content='IE=edge'>
-    <title>Recuperar Contraseña</title>
+    <title>Validar código</title>
 
     <meta name='viewport' content='width=device-width, initial-scale=1'>
     
@@ -25,23 +25,18 @@
 
     <div class="container">
     <div class="card">
-        <div class="title">Recuperación</div>
-        <form id="recuperarContrForm">
-
-
+        <div class="title">Validación de código</div>
+        
+        <div >Hemos enviado un código de recuperación a tu correo, por favor ingresalo para hacer válido el cambio de contraseña</div>
+        
+        <form id="validarCodigo">
             <div class="entry-area">
-                <input id="correoRecuperacion" type="email" name="usuario" required>
-                <div class="labeline">Ingresa tu email</div>
+                <input id="codigo" type="text" name="code" required>
+                <div class="labeline">Código de recuperación</div>
             </div>
 
-            <button type="submit" class="button">ENVIAR EMAIL</button>
+            <button type="submit" class="button">VALIDAR</button>
         </form>
-        <div class="footer">
-        
-            <div class="cuenta">Resiviras un correo para la recuperación, en unos instantes</div>
-            
-            <div class="cuenta"><a href="#" class="register">Por favor, Revisa bien tu bandeja de entrada...</a></div>
-        </div>
     </div>
 </div>
 
