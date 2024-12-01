@@ -1,4 +1,4 @@
-import { d, ruta } from '../constantes.js';
+import { d, ruta, w } from '../constantes.js';
 
 
 d.addEventListener("DOMContentLoaded", () => {
@@ -24,8 +24,6 @@ d.addEventListener("DOMContentLoaded", () => {
                 });
                 return;
             }
-    
-    
             const categoria = {
                 nombre: $nombreCategoria,
                 descripcion: $descripcionCategoria,

@@ -1,20 +1,16 @@
-
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <link rel="stylesheet" href="../css/style.css">
     <link rel="stylesheet" href="../css/global.css">
     <link rel="stylesheet" href="../css/detallesEvento.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&icon_names=search" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&display=swap');
-        </style>
-
+    </style>
     <title>Detalles del evento</title>
 </head>
 <body>
@@ -22,107 +18,62 @@
         <nav>
             <ul class="nav-bar">
                 <li class="logo"><a href="#">Event<span class="tit">-hub</a></span></li>
-                    
-                    <input type="checkbox" id="check"/>
-                    <span class="menu">
-                        <li>
-                            <a href="buscarEvento.html">Buscar eventos</a>
-                        </li>
-                        
-                        <li>
-                            <a href="index.html">PRINCIPAL</a>
-                        </li>
-                       
-                        
-                        <label for="check" class="close-menu"><i class="fas fa-times"></i></label>
-                    </span>
-                    <label for="check" class="open-menu"><i class="fas fa-bars"></i></label>
-               
+                <input type="checkbox" id="check"/>
+                <span class="menu">
+                    <li><a href="buscarEvento.html">Buscar eventos</a></li>
+                    <li><a href="index.html">PRINCIPAL</a></li>
+                    <label for="check" class="close-menu"><i class="fas fa-times"></i></label>
+                </span>
+                <label for="check" class="open-menu"><i class="fas fa-bars"></i></label>
             </ul>
         </nav>
     </header>
 
-    
     <main>
         <div class="event-details">
             <!-- Contenedor para la imagen y la información del evento -->
             <div class="event-info-wrapper">
-                <!-- Imagen del evento -->
-                <img src="/img/image.png" alt="Imagen del evento">
-      
-                <!-- Información del evento -->
+                <img id="event-image" src="/img/image.png" alt="Imagen del evento">
                 <div class="event-info">
-                    <h1>AWS Submit</h1>
-                    <h3>Fecha: 12 Octubre 2024, 20:00</h3>
-                    <h3>Lugar: Ciudad de mexico, centro de conferencias</h3>
-                    <h3>Categoria: Tecnología</h3>
+                    <h1 id="event-name">AWS Submit</h1>
+                    <h3 id="event-date">Fecha: 12 Octubre 2024, 20:00</h3>
+                    <h3 id="event-hour"></h3>
+                    <h3 id="event-location">Lugar: Ciudad de mexico, centro de conferencias</h3>
+                    <h3 id="event-category">Categoria: Tecnología</h3>
                 </div>
             </div>
-      
-            <!-- Descripción del evento -->
             <div class="event-description">
-                <p>
-                    Este evento está diseñado para reunir a los mejores talentos de la industria tecnológica. Durante el evento, se presentarán innovaciones, conferencias magistrales y oportunidades de networking.
-                </p>
-                <p>
-                    No te pierdas la oportunidad de participar y conectar con otros profesionales en un entorno dinámico y enriquecedor.
-                </p>
+                <h2>Descripción del evento</h2>
+                <p id="event-description">Este evento está diseñado para reunir a los mejores talentos de la industria tecnológica...</p>
             </div>
             <div class="more-info">
                 <button class="btn-details"><a href="registerPart.html">UNIRTE AL EVENTO</a></button>
             </div>
         </div>
     </main>
-    
 
-
-
-  <footer>
-    <div class="waves">
-        <div class="wave" id="wave1"></div>
-        <div class="wave" id="wave2"></div>
-        <div class="wave" id="wave3"></div>
-        <div class="wave" id="wave4"></div>
-    </div>
-
-
-
-    <ul class="social-icon">
-        <li>
-            <a href=""><i class="fa-brands fa-twitter"></i></a>
-        </li>
-        <li>
-            <a href=""><i class="fa-brands fa-facebook"></i></a>
-        </li>
-        <li>
-            <a href=""><i class="fa-brands fa-instagram"></i></a>
-        </li>
-        <li>
-            <a href=""><i class="fa-brands fa-youtube"></i></a>
-        </li>
-
-    </ul>
-
-    <ul class="footer_menu">
-        <li>
-            <a href="">Hogar</a>
-        </li>
-        <li>
-            <a href="">Sobre nosotros</a>
-        </li>
-        <li>
-            <a href="">Servicios</a>
-        </li>
-        <li>
-            <a href="">Contacto</a>
-        </li>
-    </ul>
-    <p>&copy; 2024 EVENT-HUB. | GMMOP</p>
-</footer>
-
-
-
-  
-  
+    <footer>
+        <div class="waves">
+            <div class="wave" id="wave1"></div>
+            <div class="wave" id="wave2"></div>
+            <div class="wave" id="wave3"></div>
+            <div class="wave" id="wave4"></div>
+        </div>
+        <ul class="social-icon">
+            <li><a href=""><i class="fa-brands fa-twitter"></i></a></li>
+            <li><a href=""><i class="fa-brands fa-facebook"></i></a></li>
+            <li><a href=""><i class="fa-brands fa-instagram"></i></a></li>
+            <li><a href=""><i class="fa-brands fa-youtube"></i></a></li>
+        </ul>
+        <ul class="footer_menu">
+            <li><a href="">Hogar</a></li>
+            <li><a href="">Sobre nosotros</a></li>
+            <li><a href="">Servicios</a></li>
+            <li><a href="">Contacto</a></li>
+        </ul>
+        <p>&copy; 2024 EVENT-HUB. | GMMOP</p>
+    </footer>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="../js/services/carga_eventos.js" type="module"></script>
 </body>
 </html>

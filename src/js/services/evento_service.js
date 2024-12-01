@@ -1,7 +1,25 @@
 import { d, ruta, w, c } from "../constantes.js";
 
+function parseJwt(token) {
+  const base64Url = token.split(".")[1];
+  const base64 = decodeURIComponent(
+    atob(base64Url)
+      .split("")
+      .map((c) => {
+        return "%" + ("00" + c.charCodeAt(0).toString(16)).slice(-2);
+      })
+      .join("")
+  );
+  return JSON.parse(base64);
+}
+
 d.addEventListener("DOMContentLoaded", () => {
   const token = localStorage.getItem("authToken");
+  const usuarioId = localStorage.getItem("usuarioId");
+
+  // YA RECUPERAMOS EL USER ID, FALTA AHCER LA PETICION PERSONALIZADA PARA OBTENER LOS EVENTOS RELACIONADOS CON ESTE USUARIO
+
+  console.log("Usuario id " + usuarioId);
 
   if (!token) {
     w.location.href = "login.html";
@@ -75,7 +93,7 @@ d.addEventListener("DOMContentLoaded", () => {
                 content: "text-center",
               },
             }).then(() => {
-            form.reset(); 
+              form.reset();
               w.location.href = "buscarEventosAdmin.html";
             });
           } else {
@@ -124,10 +142,10 @@ d.addEventListener("DOMContentLoaded", () => {
       });
   }
 
-    // CARGA DE EVENTOS
+  // CARGA DE EVENTOS
   // Función para cargar todos los eventos
   const loadEvents = () => {
-    fetch(ruta + "eventos/all", {
+    fetch(ruta + "eventos/all-by-user-id/" + usuarioId, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -163,11 +181,11 @@ d.addEventListener("DOMContentLoaded", () => {
   const displayEvents = (events) => {
     const cardsContainer = d.querySelector(".cards-container");
     cardsContainer.innerHTML = ""; // Limpiar cualquier tarjeta existente
-  
+
     events.forEach((event) => {
       // Definir el texto del botón dependiendo del estado actual del evento
       const statusButtonText = event.status ? "Desactivar" : "Activar";
-  
+
       const cardHTML = `
         <div class="card" data-event-id="${event.id}">
           <div class="card-content">
@@ -181,10 +199,14 @@ d.addEventListener("DOMContentLoaded", () => {
               <a href="detallesEventoAdmin.html">Detalles</a>
             </button>
               <button class="btn-edit-event btn-editar" >
-        <a href="actEvento.html" class="edit-link " data-event-id="${event.id}">Editar</a>
+        <a href="actEvento.html" class="edit-link " data-event-id="${
+          event.id
+        }">Editar</a>
       </button>
             <!-- Botón de cambio de estado -->
-            <button class="btn-toggle-status btn-status ${event.status ? 'btn-red' : 'btn-green'}" data-event-id="${event.id}" data-status="${event.status}">
+            <button class="btn-toggle-status btn-status ${
+              event.status ? "btn-red" : "btn-green"
+            }" data-event-id="${event.id}" data-status="${event.status}">
               ${statusButtonText}
             </button>
           </div>
@@ -192,41 +214,51 @@ d.addEventListener("DOMContentLoaded", () => {
       `;
       cardsContainer.innerHTML += cardHTML; // Agregar la tarjeta al contenedor
     });
-  
+
     // Agregar el evento de click para el botón de cambio de estado
     const statusButtons = d.querySelectorAll(".btn-toggle-status");
     statusButtons.forEach((button) => {
       button.addEventListener("click", (e) => {
         const eventId = e.target.getAttribute("data-event-id");
         const currentStatus = JSON.parse(e.target.getAttribute("data-status"));
-        cambiarEstadoUsuario(eventId, currentStatus);  // Llamar a la función para cambiar el estado
+        cambiarEstadoUsuario(eventId, currentStatus); // Llamar a la función para cambiar el estado
       });
     });
 
     const editButtons = d.querySelectorAll(".btn-edit-event a");
-    editButtons.forEach(button => {
-    button.addEventListener("click", (e) => {
+    editButtons.forEach((button) => {
+      button.addEventListener("click", (e) => {
         const eventId = button.getAttribute("data-event-id");
         localStorage.setItem("eventoId", eventId); // Guardamos el ID del evento
+        localStorage.setItem("eventoDetalles", eventId); // Guardamos el ID del evento
+      });
     });
+    
+    const detallesButtons = d.querySelectorAll(".btn-details");
+    detallesButtons.forEach((detalleBtn) => {
+      detalleBtn.addEventListener("click", (e) => {
+        e.preventDefault(); // Prevenir la redirección automática
+        const eventId = detalleBtn.closest(".card").getAttribute("data-event-id");
+        localStorage.setItem("eventoId", eventId); // Guardar ID del evento en el localStorage
+        localStorage.setItem("eventoDetalles", eventId); // Guardar detalles del evento
+        window.location.href = "detallesEventoAdmin.html"; // Redirigir a la página de detalles
+      });
     });
-
 
   };
-  
-  if(w.location.href.includes("buscarEventosAdmin.html")){
+
+  if (w.location.href.includes("buscarEventosAdmin.html")) {
     loadEvents();
   }
 
   const cambiarEstadoUsuario = (eventId, currentStatus) => {
-
     // Cambiar el estado: si está activo (true), lo ponemos a inactivo (false), y viceversa
     const newStatus = !currentStatus;
-  
+
     // Crear el cuerpo de la solicitud con los datos del evento
     const eventData = {
       id: parseInt(eventId),
-      status: newStatus,  // Cambiar el estado
+      status: newStatus, // Cambiar el estado
     };
     console.log(eventData);
     // Enviar la solicitud PUT para actualizar el estado del evento
@@ -250,10 +282,10 @@ d.addEventListener("DOMContentLoaded", () => {
           Swal.fire({
             icon: "success",
             title: "¡Éxito!",
-            text: `El evento ha sido ${newStatus ? "activado" : "desactivado"}.`,
+            text: `El evento ha sido ${
+              newStatus ? "activado" : "desactivado"
+            }.`,
           });
-  
-          // Recargar los eventos para reflejar el cambio de estado
           loadEvents();
         } else {
           Swal.fire({
@@ -273,83 +305,87 @@ d.addEventListener("DOMContentLoaded", () => {
       });
   };
 
-
   // Función que carga los datos del evento en el formulario
-function cargarInfoEvento() {
-    const eventoId = localStorage.getItem('eventoId');  // Recuperamos el ID del evento
+  function cargarInfoEvento() {
+    const eventoId = localStorage.getItem("eventoId"); // Recuperamos el ID del evento
     if (eventoId) {
       console.log(`Recuperado id de evento: ${eventoId}`);
-  
+
       // Realizamos una solicitud GET para obtener los detalles del evento
       const token = localStorage.getItem("authToken");
       if (!token) {
         w.location.href = "login.html";
         return;
       }
-  
+
       fetch(ruta + "eventos/" + eventoId, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
-          "Authorization": `Bearer ${token}`,
+          Authorization: `Bearer ${token}`,
         },
       })
-      .then(res => res.json())
-      .then(data => {
-        // Llenamos el formulario con los datos del evento
-        document.getElementById('eventNameUpdate').value = data.result.nombre;
-        document.getElementById('eventDesUpdate').value = data.result.descripcion;
-        document.getElementById('eventAddressUpdate').value = data.result.lugar;
-        document.getElementById('eventDateUpdate').value = data.result.fecha;
-        document.getElementById('eventTimeUpdate').value = data.result.hora;
-        document.getElementById('eventStatusUpdate').value = data.result.status ? 'true' : 'false';
-        
-        // Llenar el campo de categorías si es necesario
-        cargarCategorias();  // Asumo que tienes esta función para cargar las categorías
-      })
-      .catch(error => {
-        console.error('Error al obtener los datos del evento:', error);
-      });
+        .then((res) => res.json())
+        .then((data) => {
+          // Llenamos el formulario con los datos del evento
+          document.getElementById("eventNameUpdate").value = data.result.nombre;
+          document.getElementById("eventDesUpdate").value =
+            data.result.descripcion;
+          document.getElementById("eventAddressUpdate").value =
+            data.result.lugar;
+          document.getElementById("eventDateUpdate").value = data.result.fecha;
+          document.getElementById("eventTimeUpdate").value = data.result.hora;
+          document.getElementById("eventStatusUpdate").value = data.result
+            .status
+            ? "true"
+            : "false";
+
+          // Llenar el campo de categorías si es necesario
+          cargarCategorias(); // Asumo que tienes esta función para cargar las categorías
+        })
+        .catch((error) => {
+          console.error("Error al obtener los datos del evento:", error);
+        });
     } else {
       Swal.fire({
         icon: "error",
         title: "Error",
         text: "No se ha encontrado el ID del evento.",
       });
-      w.location.href = "buscarEventosAdmin.html";  // Redirigir si no hay ID de evento
+      w.location.href = "buscarEventosAdmin.html"; // Redirigir si no hay ID de evento
     }
   }
-  
+
   // Función para cargar las categorías activas (puedes adaptarla si ya tienes esta función)
   function cargarCategorias() {
     const token = localStorage.getItem("authToken");
-    const categorySelect = d.getElementById('categorySelectUpdate');
-  
+    const categorySelect = d.getElementById("categorySelectUpdate");
+
     fetch(ruta + "categorias/all-active", {
       method: "GET",
       headers: {
         Authorization: `Bearer ${token}`,
       },
     })
-    .then(res => res.json())
-    .then(data => {
-      data.result.forEach(cat => {
-        const option = d.createElement("option");
-        option.value = cat.id;
-        option.textContent = cat.nombre;
-        categorySelect.appendChild(option);
+      .then((res) => res.json())
+      .then((data) => {
+        data.result.forEach((cat) => {
+          const option = d.createElement("option");
+          option.value = cat.id;
+          option.textContent = cat.nombre;
+          categorySelect.appendChild(option);
+        });
+      })
+      .catch((error) => {
+        console.error("Error al cargar las categorías:", error);
       });
-    })
-    .catch(error => {
-      console.error("Error al cargar las categorías:", error);
-    });
   }
-  
+
   // Función que se ejecuta cuando se envía el formulario
   function actualizarEvento(event) {
-    event.preventDefault();  // Prevenir el comportamiento por defecto del formulario
-  
-    const eventoId = localStorage.getItem('eventoId');  // Recuperamos el ID del evento desde localStorage
+    event.preventDefault(); // Prevenir el comportamiento por defecto del formulario
+
+    const eventoId = localStorage.getItem("eventoId"); // Recuperamos el ID del evento desde localStorage
     if (!eventoId) {
       Swal.fire({
         icon: "error",
@@ -358,18 +394,30 @@ function cargarInfoEvento() {
       });
       return;
     }
-  
+
     // Obtenemos los valores del formulario
-    const nombre = document.getElementById('eventNameUpdate').value.trim();
-    const descripcion = document.getElementById('eventDesUpdate').value.trim();
-    const direccion = document.getElementById('eventAddressUpdate').value.trim();
-    const fecha = document.getElementById('eventDateUpdate').value.trim();
-    const hora = document.getElementById('eventTimeUpdate').value.trim();
-    const categoriaId = document.getElementById('categorySelectUpdate').value.trim();
-    const status = document.getElementById('eventStatusUpdate').value === 'true';
-  
+    const nombre = document.getElementById("eventNameUpdate").value.trim();
+    const descripcion = document.getElementById("eventDesUpdate").value.trim();
+    const direccion = document
+      .getElementById("eventAddressUpdate")
+      .value.trim();
+    const fecha = document.getElementById("eventDateUpdate").value.trim();
+    const hora = document.getElementById("eventTimeUpdate").value.trim();
+    const categoriaId = document
+      .getElementById("categorySelectUpdate")
+      .value.trim();
+    const status =
+      document.getElementById("eventStatusUpdate").value === "true";
+
     // Verificamos que todos los campos estén completos
-    if (!nombre || !descripcion || !fecha || !hora || !direccion || !categoriaId) {
+    if (
+      !nombre ||
+      !descripcion ||
+      !fecha ||
+      !hora ||
+      !direccion ||
+      !categoriaId
+    ) {
       Swal.fire({
         icon: "error",
         title: "Campos vacíos",
@@ -377,7 +425,7 @@ function cargarInfoEvento() {
       });
       return;
     }
-  
+
     // Creamos el objeto con los datos actualizados
     const evento = {
       id: eventoId,
@@ -386,10 +434,10 @@ function cargarInfoEvento() {
       fecha: fecha,
       hora: hora,
       lugar: direccion,
-      categoriaId: parseInt(categoriaId),  // Convertimos el ID de la categoría a número
+      categoriaId: parseInt(categoriaId), // Convertimos el ID de la categoría a número
       status: status,
     };
-  
+
     // Obtenemos el token de autenticación
     const token = localStorage.getItem("authToken");
     if (!token) {
@@ -400,57 +448,54 @@ function cargarInfoEvento() {
       });
       return;
     }
-  
+
     // Realizamos la solicitud PUT para actualizar el evento
     fetch(ruta + "eventos/update", {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
-        "Authorization": `Bearer ${token}`,
+        Authorization: `Bearer ${token}`,
       },
       body: JSON.stringify(evento),
     })
-    .then(res => {
-      if (!res.ok) {
-        throw new Error("Error al actualizar el evento");
-      }
-      return res.json();
-    })
-    .then(data => {
+      .then((res) => {
+        if (!res.ok) {
+          throw new Error("Error al actualizar el evento");
+        }
+        return res.json();
+      })
+      .then((data) => {
         Swal.fire({
-            icon: "success",
-            title: "Evento actualizado",
-            text: "El evento ha sido actualizado correctamente.",
-            confirmButtonText: "Aceptar",
-            customClass: {
-                title: "text-center", // Centra el título
-                content: "text-center", // Centra el contenido
-                confirmButton: "btn-center" // Centra el botón
-            }
+          icon: "success",
+          title: "Evento actualizado",
+          text: "El evento ha sido actualizado correctamente.",
+          confirmButtonText: "Aceptar",
+          customClass: {
+            title: "text-center", // Centra el título
+            content: "text-center", // Centra el contenido
+            confirmButton: "btn-center", // Centra el botón
+          },
         }).then(() => {
-        w.location.href = "buscarEventosAdmin.html";  // Redirigimos al listado de eventos
+          w.location.href = "buscarEventosAdmin.html"; // Redirigimos al listado de eventos
+        });
+      })
+      .catch((error) => {
+        console.error("Error al actualizar el evento:", error);
+        Swal.fire({
+          icon: "error",
+          title: "Error al actualizar",
+          text: "Hubo un problema al actualizar el evento. Inténtalo nuevamente.",
+        });
       });
-    })
-    .catch(error => {
-      console.error("Error al actualizar el evento:", error);
-      Swal.fire({
-        icon: "error",
-        title: "Error al actualizar",
-        text: "Hubo un problema al actualizar el evento. Inténtalo nuevamente.",
-      });
-    });
   }
-  
+
   // Cargar los datos del evento cuando se cargue la página
-  
-    cargarInfoEvento();  // Llamamos para cargar los datos del evento
-  
-    // Asignar el evento al formulario
-    const formActualizar = d.getElementById('updateEventForm');
-    if (formActualizar) {
-        formActualizar.addEventListener("submit", actualizarEvento);
-    }
-  
 
+  cargarInfoEvento(); // Llamamos para cargar los datos del evento
 
+  // Asignar el evento al formulario
+  const formActualizar = d.getElementById("updateEventForm");
+  if (formActualizar) {
+    formActualizar.addEventListener("submit", actualizarEvento);
+  }
 });

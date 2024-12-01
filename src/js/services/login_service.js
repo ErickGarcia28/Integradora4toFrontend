@@ -1,5 +1,5 @@
 
-import { d, ruta } from '../constantes.js';
+import { d, ruta, w } from '../constantes.js';
 
 const $correoInput = d.getElementById("inputLogin");
 const $contraInput = d.getElementById("inputPass");
@@ -41,18 +41,30 @@ d.addEventListener("DOMContentLoaded", () => {
             const role = decodedToken.role; 
             console.log("Rol del usuario:", role);
 
-            if(role== "SUPERADMIN"){
-                window.location.href = "principalSuperAdmin.html";
-                }
-            else if(role == "ADMIN"){
+            const status = decodedToken.status;  // Extraemos el estatus del usuario desde el token
+            console.log("Estado del usuario:", status);
+
+            let userId = decodedToken.id; //  IMPORTANTE ESTE PARA LA SESIÓN
+
+
+            if (status === true) {
+                localStorage.setItem("usuarioId", userId);
+
+                if (role === "SUPERADMIN") {
+                    window.location.href = "principalSuperAdmin.html";
+                } else if (role === "ADMIN") {
                     window.location.href = "principalAdmin.html";
-            }else{
-                    Swal.fire({
+                } else {
+                    window.location.href = "principalUser.html";
+                }
+            } else {
+                // Si el usuario no está activo
+                Swal.fire({
                     icon: 'error',
-                    title: 'Acceso denegado',
-                    text: 'No tienes los permisos necesarios para acceder.',
+                    title: 'Cuenta desactivada',
+                    text: 'Tu cuenta está inactiva. Contacta al administrador.',
                     confirmButtonText: 'Aceptar',
-                });    
+                });
             }
         })
         .catch(err => {
