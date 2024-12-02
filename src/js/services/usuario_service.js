@@ -170,8 +170,15 @@ d.addEventListener("DOMContentLoaded", () => {
           botonEstado.classList.remove("btn-red");
           botonEstado.classList.add("btn-green");
         }
+        Swal.fire({
+          icon: "success",
+          title: "Estado actualizado",
+          text: "Estado de usuario actualizado",
+          confirmButtonText: "Aceptar",
+        }).then(() => {
+          window.location.reload();
+        });
 
-        window.location.reload();
       })
       .catch((error) => {
         console.error("Error al cambiar el estado:", error);
