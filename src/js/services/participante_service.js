@@ -73,7 +73,7 @@ d.addEventListener("DOMContentLoaded", () => {
           Swal.fire({
             icon: "success",
             title: "Éxito",
-            text: result.message || "Te registraste exitosamente en el evento!",
+            text: "¡Te registraste exitosamente en el evento!",
           }).then(() => {
             localStorage.removeItem("eventoDetalles");
             $formRegistro.reset();
@@ -239,7 +239,7 @@ d.addEventListener("DOMContentLoaded", () => {
 
         Swal.fire({
           icon: "success",
-          title: "Éxito",
+          title: "Estado actualizado",
           text: "El estado del participante se actualizó correctamente.",
         });
       })
@@ -381,8 +381,8 @@ d.addEventListener("DOMContentLoaded", () => {
         const result = await response.json();
         Swal.fire({
           icon: "success",
-          title: "Éxito",
-          text: result.message || "Participante actualizado exitosamente.",
+          title: "Participante actualizado",
+          text: "El participante ha sido actualizado exitosamente.",
         }).then(() => {
           localStorage.removeItem("participanteId");
           window.location.href = "verPart.html";

@@ -286,6 +286,15 @@ footer .wave#wave4{
 }
 
 
+#btn-cambiar-contra{
+    margin-left: 4em;
+}
+
+#btn-cambiar-contra a {
+    color: white;
+    text-decoration: none !important;
+}
+
 @media(max-width: 510px){
     .menu{
         flex-direction: column;

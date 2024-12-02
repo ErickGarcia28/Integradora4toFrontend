@@ -282,7 +282,7 @@ d.addEventListener("DOMContentLoaded", () => {
         if (data.type === "SUCCESS") {
           Swal.fire({
             icon: "success",
-            title: "¡Éxito!",
+            title: "Estado del evento actualizado",
             text: `El evento ha sido ${
               newStatus ? "activado" : "desactivado"
             }.`,
