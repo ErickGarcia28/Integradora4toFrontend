@@ -4,12 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ver Perfil</title>
-    
     <link rel="stylesheet" href="../css/global.css">
     <link rel="stylesheet" href="../css/verPerfil.css">
-
     <link rel="icon" href="/img/perfil.png" type="image/x-icon">
-
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
@@ -19,11 +16,7 @@
         @import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&display=swap');
         </style>
 </head>
-<body>
-
-
-
-    
+<body>    
     <header>
         <nav>
             <ul class="nav-bar">
@@ -34,23 +27,18 @@
                         <li>
                             <a href="principalSuperAdmin.html">PRINCIPAL</a>
                         </li>
-
-                        
-
                         <li>
                             <a href="crearEvento.html">Crear eventos</a>
                         </li>
-                     
-                        
-                        
                         <label for="check" class="close-menu"><i class="fas fa-times"></i></label>
+                        <li>
+                            <a id="cerrarSesionBtn">Cerrar Sesión</a>
+                        </li>
                     </span>
-                    <label for="check" class="open-menu"><i class="fas fa-bars"></i></label>
-               
+                    <label for="check" class="open-menu"><i class="fas fa-bars"></i></label>  
             </ul>
         </nav>
     </header>
-
     <main> 
     <div class="container">
         <div class="card">
@@ -93,5 +81,6 @@
     </footer>
     <script src="../js/services/perfil_service.js" type="module"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="../js/cs.js" type="module"></script>
 </body>
 </html>
