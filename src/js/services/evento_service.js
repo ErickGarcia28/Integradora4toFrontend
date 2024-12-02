@@ -1,5 +1,8 @@
 import { d, ruta, w, c } from "../constantes.js";
 
+
+
+
 function parseJwt(token) {
   const base64Url = token.split(".")[1];
   const base64 = decodeURIComponent(
@@ -149,6 +152,20 @@ d.addEventListener("DOMContentLoaded", () => {
         console.error("Error al cargar los eventos:", error);
       });
   }
+  const btnReload = d.getElementById("btn-reload");
+  if(btnReload){
+    btnReload.addEventListener("click",()=>{
+      w.location.reload();
+    });
+  }
+  
+  const btnCatActive = d.getElementById("btn-events-active");
+  if (btnCatActive) {
+    btnCatActive.addEventListener("click", (e) => {
+      e.preventDefault();
+      loadActiveEvents(); 
+    });
+  }
 
   const loadEvents = () => {
     fetch(ruta + "eventos/all-by-user-id/" + usuarioId, {
@@ -181,6 +198,52 @@ d.addEventListener("DOMContentLoaded", () => {
         });
       });
   };
+
+  const loadActiveEvents = () => {
+    fetch(ruta + "eventos/all-by-user-id-active/" + usuarioId, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+    })
+      .then((res) => {
+        if (!res.ok) {
+          throw new Error("Error al obtener los eventos");
+        }
+        return res.json();
+      })
+      .then((data) => {
+        console.log(data);
+        if (data.result && data.result.length > 0) {
+          displayEvents(data.result);
+        } else {
+          console.log("No se encontraron eventos.");
+        }
+      })
+      .catch((error) => {
+        console.error("Error al cargar los eventos:", error);
+        Swal.fire({
+          icon: "error",
+          title: "¡Error!",
+          text: "Hubo un problema al cargar los eventos.",
+        });
+      });
+  };
+
+
+  if (w.location.href.includes("buscarEventosAdmin.html")) {
+    loadEvents();
+  }
+  const btnActives = d.getElementById("btn-events-active");
+
+  if (btnActives) {
+    btnActives.addEventListener("click",(e)=>{
+      e.preventDefault();
+      loadActiveEvents();
+    });
+  }
+
 
   const displayEvents = (events) => {
     const cardsContainer = d.querySelector(".cards-container");
@@ -250,9 +313,6 @@ d.addEventListener("DOMContentLoaded", () => {
     });
   };
 
-  if (w.location.href.includes("buscarEventosAdmin.html")) {
-    loadEvents();
-  }
 
   const cambiarEstadoUsuario = (eventId, currentStatus) => {
     const newStatus = !currentStatus;

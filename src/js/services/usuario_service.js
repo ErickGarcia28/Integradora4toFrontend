@@ -49,7 +49,7 @@ d.addEventListener("DOMContentLoaded", () => {
               document.getElementById("registerForm").reset();
               w.location.href = "verUsuarios.html";
             });
-          } else {
+          } else { 
             Swal.fire({
               title: "Error",
               text: data.mensaje || "Hubo un problema al registrar el usuario.",

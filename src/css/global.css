@@ -11,8 +11,6 @@ body{
     --color1: #F05537;
     --color3: #000;
     min-height: 100vh;
-   
-
 
 }
 
@@ -318,4 +316,24 @@ footer .wave#wave4{
 }
 .btn-green {
     background-color: #28a745 !important;
+}
+
+.activos{
+    color: var(--color2);
+    background-color: var(--color4);
+    border-radius: 12px;
+    padding: 4px 12px;
+    border: none;
+    text-transform: uppercase;
+    transition: .3s;
+}
+
+.activos:hover{
+    background-color: var(--color1);
+}
+button {
+    cursor: pointer;
+}
+a {
+    cursor: pointer;
 }

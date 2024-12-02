@@ -195,15 +195,23 @@ function obtenerCategoriasActivas() {
     });
 }
 
-d.addEventListener("DOMContentLoaded", () => {
+
   const btnCatActive = document.getElementById("btncat-active");
 
   if (btnCatActive) {
-    btnCatActive.addEventListener("click", () => {
+    btnCatActive.addEventListener("click", (e) => {
+      e.preventDefault();
       obtenerCategoriasActivas(); 
     });
   }
-});
+
+  const btnReload = d.getElementById("btn-reload");
+  if(btnReload){
+    btnReload.addEventListener("click",()=>{
+      w.location.reload();
+    });
+  }
+
 
 
 

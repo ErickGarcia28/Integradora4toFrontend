@@ -1,5 +1,17 @@
 import { d, ruta, w } from "../constantes.js";
 
+if(w.location.href.includes("verPerfil.html")){
+  const cambioContrPerfilBtn = d.getElementById("cc-perfil");
+  if(cambioContrPerfilBtn){
+    cambioContrPerfilBtn.addEventListener("click", function(e){
+      e.preventDefault();
+      const inputEmail = d.getElementById("inputEmail");
+      localStorage.setItem("correoRecuperacion", inputEmail.value);
+      w.location.href = "cambiar-contra.html";
+    });
+  }
+}
+
 d.addEventListener("DOMContentLoaded", () => {
   const form = d.getElementById("recuperarContrForm");
 
