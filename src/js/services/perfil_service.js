@@ -5,7 +5,7 @@ d.addEventListener("DOMContentLoaded", () => {
   const usuarioId = localStorage.getItem("usuarioId");
 
   if (!token) {
-    w.location.href = "login.html"; // Redirige al login si no hay token
+    w.location.href = "login.html"; 
     return;
   }
 
@@ -25,7 +25,7 @@ d.addEventListener("DOMContentLoaded", () => {
   const editProfileButton = d.getElementById("editProfileButton");
   const saveProfileButton = d.getElementById("saveProfileButton");
 
-  // Cargar información del perfil
+  
   const cargarPerfil = async () => {
     try {
       console.log(`Recuperado id de usuario: ${usuarioId}`);
@@ -42,9 +42,9 @@ d.addEventListener("DOMContentLoaded", () => {
       }
 
       const data = await response.json();
-      const usuario = data.result; // Ajusta según la estructura de tu backend
+      const usuario = data.result; 
       console.log(usuario);
-      // Llenar los inputs con la información del usuario
+      
       inputNombre.value = usuario.nombre;
       inputApellido.value = usuario.apellido;
       inputEmail.value = usuario.correoElectronico;
@@ -61,7 +61,7 @@ d.addEventListener("DOMContentLoaded", () => {
     }
   };
 
-  // Habilitar edición del perfil
+  
   const habilitarEdicion = () => {
     inputNombre.disabled = false;
     inputApellido.disabled = false;
@@ -71,7 +71,7 @@ d.addEventListener("DOMContentLoaded", () => {
     saveProfileButton.style.display = "inline-block";
   };
 
-  // Guardar cambios del perfil
+  
   const guardarPerfil = async () => {
     const nombre = inputNombre.value.trim();
     const apellido = inputApellido.value.trim();
@@ -102,7 +102,7 @@ d.addEventListener("DOMContentLoaded", () => {
       apellido: apellido,
       correoElectronico: correoElectronico,
       telefono: parseInt(telefono),
-      status: true, // Campo requerido por el DTO
+      status: true, 
     };
 
     try {
@@ -142,10 +142,10 @@ d.addEventListener("DOMContentLoaded", () => {
     }
   };
 
-  // Eventos de los botones
+  
   editProfileButton.addEventListener("click", habilitarEdicion);
   saveProfileButton.addEventListener("click", guardarPerfil);
 
-  // Cargar la información del perfil al inicio
+  
   cargarPerfil();
 });

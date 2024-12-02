@@ -6,7 +6,7 @@ d.addEventListener("DOMContentLoaded", () => {
  
   if(form){
     form.addEventListener("submit", async (e) => {
-        e.preventDefault(); // Prevenir el comportamiento predeterminado del formulario
+        e.preventDefault(); 
     
         const emailInput = d.getElementById('correoRecuperacion');
         const correo = emailInput?.value.trim();
@@ -59,7 +59,7 @@ d.addEventListener("DOMContentLoaded", () => {
 
   if (formValidarCodigo) {
     formValidarCodigo.addEventListener("submit", async (e) => {
-      e.preventDefault(); // Prevenir el comportamiento predeterminado del formulario
+      e.preventDefault(); 
 
       const codigoInput = d.getElementById("codigo");
       const codigo = codigoInput?.value.trim();
@@ -74,7 +74,7 @@ d.addEventListener("DOMContentLoaded", () => {
       }
 
       try {
-        // Hacer la petición al backend
+        
         const response = await fetch(`${ruta}usuarios/verify-code/${codigo}`, {
           method: "POST",
           headers: {
@@ -89,7 +89,7 @@ d.addEventListener("DOMContentLoaded", () => {
 
         const data = await response.json();
 
-        // Mostrar el mensaje de éxito
+        
         Swal.fire({
           icon: "success",
           title: "Código Verificado",
@@ -116,16 +116,16 @@ d.addEventListener("DOMContentLoaded", () => {
 
   if (formCambioContrasena) {
     formCambioContrasena.addEventListener("submit", async (e) => {
-      e.preventDefault(); // Prevenir el comportamiento por defecto del formulario
+      e.preventDefault(); 
 
       const nuevaContrasenaInput = d.getElementById("nuevaContrasena");
       const confirmarContrasenaInput = d.getElementById("confirmarContrasena");
 
       const nuevaContrasena = nuevaContrasenaInput.value.trim();
       const confirmarContrasena = confirmarContrasenaInput.value.trim();
-      const correo = localStorage.getItem("correoRecuperacion"); // Obtenemos el correo del localStorage
+      const correo = localStorage.getItem("correoRecuperacion"); 
 
-      // Validar que las contraseñas no estén vacías y coincidan
+      
       if (!nuevaContrasena || !confirmarContrasena) {
         Swal.fire({
           icon: "error",
@@ -153,14 +153,14 @@ d.addEventListener("DOMContentLoaded", () => {
         return;
       }
 
-      // Preparar el objeto a enviar
+      
       const payload = {
         correoElectronico: correo,
         nuevaContrasena: nuevaContrasena,
       };
 
       try {
-        // Realizar la petición al backend
+        
         const response = await fetch(`${ruta}usuarios/update-password`, {
           method: "PUT",
           headers: {
@@ -180,8 +180,8 @@ d.addEventListener("DOMContentLoaded", () => {
           title: "Contraseña Cambiada",
           text: data.message || "Tu contraseña se ha cambiado exitosamente.",
         }).then(() => {
-          localStorage.removeItem("correoRecuperacion"); // Limpiar el correo del localStorage
-          w.location.href = "login.html"; // Redirigir al login
+          localStorage.removeItem("correoRecuperacion"); 
+          w.location.href = "login.html"; 
         });
       } catch (error) {
         console.error("Error al cambiar la contraseña:", error);

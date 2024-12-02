@@ -1,4 +1,3 @@
-// config.js
 export const c = console;
 export const d = document;
 export const w = window;

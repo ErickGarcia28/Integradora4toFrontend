@@ -8,7 +8,6 @@ document.addEventListener('DOMContentLoaded', function () {
     if(toggleConfirm){
         toggleConfirm.addEventListener('click', showHideConfirm);
     }
-
     function showHide() {
         if (pass.type === 'password') {
             pass.setAttribute('type', 'text');
@@ -18,7 +17,6 @@ document.addEventListener('DOMContentLoaded', function () {
             toggle.style.background = "url('/img/eye-off.svg')"; 
         }
     }
-
     function showHideConfirm() {
         if (confirmPass.type === 'password') {
             confirmPass.setAttribute('type', 'text');
