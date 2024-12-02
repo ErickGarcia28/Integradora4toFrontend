@@ -18,13 +18,13 @@ body {
 }
 
 main {
-    width: 100%; /* Ocupa todo el ancho */
-    height: auto; /* Ajusta la altura automáticamente al contenido */
-    display: flex; /* Si estás usando flexbox dentro */
-    justify-content: center; /* Centra horizontalmente los elementos */
-    align-items: center; /* Centra verticalmente los elementos */
-    padding: 20px; /* Opcional: agrega un poco de espacio interno */
-    box-sizing: border-box; /* Asegura que padding no afecte el tamaño total */
+    width: 100%; 
+    height: auto;
+    display: flex; 
+    justify-content: center; 
+    align-items: center; 
+    padding: 20px; 
+    box-sizing: border-box; 
     padding-bottom: 5em;
 }
 

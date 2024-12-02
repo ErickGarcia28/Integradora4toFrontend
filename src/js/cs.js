@@ -13,6 +13,7 @@ d.addEventListener("DOMContentLoaded", () => {
         localStorage.removeItem("usuarioId");
       
         // Redirigir al login
+
         Swal.fire({
           icon: "success",
           title: "Sesión cerrada",
@@ -22,5 +23,6 @@ d.addEventListener("DOMContentLoaded", () => {
           window.location.href = "index.html";
         });
     });
+    
 });
 

@@ -90,7 +90,7 @@ d.addEventListener("DOMContentLoaded", () => {
         const $card_user = d.createElement("div");
         $card_user.classList.add("card");
         $card_user.innerHTML = `
-        <div class="card">
+        
           <div class="card-content">
             <h3>${usuario.nombre}</h3>
             <p>${usuario.correoElectronico}</p>
@@ -98,7 +98,7 @@ d.addEventListener("DOMContentLoaded", () => {
             <p><strong>Estado:</strong> ${
               usuario.status ? "Activo" : "Deshabilitado"
             }</p>
-          </div>
+          
           <div class="more-info">
             <button id="btn-status-${usuario.id}" class="btn-status ${
           usuario.status ? "btn-red" : "btn-green"
