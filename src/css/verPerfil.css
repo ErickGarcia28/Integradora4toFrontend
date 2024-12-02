@@ -45,9 +45,23 @@ body {
     cursor: pointer;
     font-size: 16px;
     transition: background-color 0.3s ease;
+    
 }
 
-.edit-button:hover {
+
+.save-button{
+    padding: 10px 20px;
+    background-color: #F05537;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+
+}
+
+.save-button,  .edit-button:hover {
     background-color: #D04330;
 }
 
@@ -115,16 +129,7 @@ body {
     border-radius: 8px;
 }
 
-.labeline {
-    position: absolute;
-    padding: 0 10px;
-    margin: 10px;
-    font-size: 1em;
-    color: #999; 
-    pointer-events: none;
-    background-color: #fff;
-    transition: 0.3s ease;
-}
+
 
 input:focus,
 input:valid {
@@ -211,4 +216,13 @@ footer {
     justify-content: center;
     align-items: center;
     flex-direction: column;
+}
+
+
+.input{
+    width: 70%;
+
+    margin-left: 4%;
+    border-radius: 12px;
+    padding:8px 12px;
 }

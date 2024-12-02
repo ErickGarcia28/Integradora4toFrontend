@@ -19,7 +19,7 @@ d.addEventListener("DOMContentLoaded", () => {
           text: "Tu sesión ha sido cerrada exitosamente.",
           confirmButtonText: "Aceptar",
         }).then(() => {
-          window.location.href = "login.html";
+          window.location.href = "index.html";
         });
     });
 });
