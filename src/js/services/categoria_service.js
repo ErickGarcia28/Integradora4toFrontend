@@ -133,6 +133,82 @@ d.addEventListener("DOMContentLoaded", () => {
       console.error("Error:", error);
     });
 
+
+
+
+function obtenerCategoriasActivas() {
+
+  fetch(ruta + "categorias/all-active", {
+    method: "GET",
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  })
+    .then((res) => {
+      if (!res.ok) {
+        throw new Error("Error al obtener las categorías");
+      }
+      return res.json();
+    })
+    .then((data) => {
+      console.log(data.result);
+
+      const $cards_container = document.getElementById("cards-container");
+      if ($cards_container) {
+        $cards_container.innerHTML = ""; 
+      }
+
+      data.result.forEach((cat) => {
+        let $card = document.createElement("div"); 
+        $card.classList.add("card");
+        $card.innerHTML = `
+          <div class="card-content">
+            <h3>${cat.nombre}</h3>
+            <p>${cat.descripcion}</p>
+            <p><strong>Estado:</strong> ${cat.status ? "Activa" : "Deshabilitada"}</p>
+          </div>
+          <div class="more-info">
+            <button id="btn-status-${cat.id}" class="btn-status ${cat.status ? "btn-red" : "btn-green"}">
+              ${cat.status ? "DESHABILITAR" : "ACTIVAR"}
+            </button>
+            <button class="btn-details"><a href="actCategoria.html">EDITAR</a></button>
+          </div>
+        `;
+
+        const btnStatus = $card.querySelector(`#btn-status-${cat.id}`);
+        const btnDetails = $card.querySelector(".btn-details");
+
+        btnStatus.addEventListener("click", () => cambiarEstado(cat.id, cat.status));
+
+        btnDetails.addEventListener("click", () => {
+          localStorage.setItem("categoryId", cat.id);
+          console.log(`Categoría con id ${cat.id} guardada en localStorage.`);
+        });
+
+        if ($cards_container) {
+          $cards_container.appendChild($card);
+        }
+      });
+    })
+    .catch((error) => {
+      console.error("Error:", error);
+    });
+}
+
+d.addEventListener("DOMContentLoaded", () => {
+  const btnCatActive = document.getElementById("btncat-active");
+
+  if (btnCatActive) {
+    btnCatActive.addEventListener("click", () => {
+      obtenerCategoriasActivas(); 
+    });
+  }
+});
+
+
+
+
+
   function cambiarEstado(categoriaId, estadoActual) {
     const token = localStorage.getItem("authToken");
 

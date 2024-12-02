@@ -40,8 +40,30 @@ body{
 }
 
 .container_buscador{
+    margin-top: 2em;
+    display: flex;
+    gap: 2em;
+    align-items: center;  
     padding-left: 10%;
 }
+
+
+.activos{
+    color: var(--color2);
+    background-color: var(--color4);
+    border-radius: 12px;
+    padding: 4px 12px;
+    border: none;
+    text-transform: uppercase;
+    transition: .3s;
+}
+
+.activos:hover{
+    background-color: var(--color1);
+}
+
+
+
 
 .content_loader{
     height: 100vh;
@@ -50,6 +72,8 @@ body{
     align-items: center;
     background-color: #d1d1d2;
 }
+
+
 
 
 

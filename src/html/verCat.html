@@ -52,6 +52,10 @@
                 <span class="search-icon material-symbols-outlined">search</span>
                 <input class="search-input" type="search" placeholder="Buscar categorías...">
             </div>
+
+            <div class="container_activos">
+                <button id="btncat-active" class="activos">activas</button>
+            </div>
         </form>
     </div>
 
@@ -110,44 +114,6 @@
 
     <script src="../js/services/categoria_service.js" type="module"></script>
 
-    <script>
-      
-      document.addEventListener("DOMContentLoaded", () => {
-    const searchInput = document.querySelector(".search-input");
-    const cardsContainer = document.querySelector(".cards-container");
-    const cards = document.querySelectorAll(".card");
-
-   
-    const noResultsMessage = document.createElement("div");
-    noResultsMessage.textContent = "No se encontraron coincidencias, intente de nuevo.";
-    noResultsMessage.classList.add("no-results-message"); 
-    noResultsMessage.style.display = "none"; 
-    cardsContainer.appendChild(noResultsMessage);
-
-   
-    searchInput.addEventListener("input", () => {
-        const query = searchInput.value.toLowerCase().trim();
-        let hasVisibleCards = false;
-
-        cards.forEach(card => {
-            const cardContent = card.innerText.toLowerCase();
-            if (cardContent.includes(query)) {
-                card.style.display = "";
-                hasVisibleCards = true;
-            } else {
-                card.style.display = "none";
-            }
-        });
-
-        // Mostrar mensaje si no hay tarjetas visibles
-        if (hasVisibleCards) {
-            noResultsMessage.style.display = "none";
-        } else {
-            noResultsMessage.style.display = "flex";
-        }
-    });
-});
-    </script>
 </body>
 </body>
 </html>
