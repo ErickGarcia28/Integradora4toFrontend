@@ -70,9 +70,6 @@ d.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-
-
-
   const $users_container = d.getElementById("usuarios_container");
 
   fetch(ruta + "usuarios/all", {
@@ -92,12 +89,14 @@ d.addEventListener("DOMContentLoaded", () => {
       
       const usuarioId = localStorage.getItem("usuarioId");
   
-      function esUsuarioExcluido(usuario) {
-        return usuario.correoElectronico.toLowerCase() === "superadminejemplo@example.com" || usuario.id == usuarioId;
-    }
+    //   function esUsuarioExcluido(usuario) {
+    //     return usuario.correoElectronico.toLowerCase() === "superadminejemplo@example.com" || usuario.id == usuarioId;
+    // }
   
       data.result.forEach((usuario) => {
-        if (esUsuarioExcluido(usuario)) {
+
+        if (usuario.rol == "SUPERADMIN") {
+      
           return; 
         }
   
@@ -139,7 +138,7 @@ d.addEventListener("DOMContentLoaded", () => {
   
         if (btnDetails) {
           btnDetails.addEventListener("click", () => {
-            localStorage.setItem("usuarioId", usuario.id);
+            localStorage.setItem("usuarioIdAct", usuario.id);
             console.log(`Usuario con id ${usuario.id} guardado en localStorage.`);
           });
         }
@@ -203,7 +202,7 @@ d.addEventListener("DOMContentLoaded", () => {
       });
   }
   function cargarInfoUsuario() {
-    const usuarioId = localStorage.getItem("usuarioId");
+    const usuarioId = localStorage.getItem("usuarioIdAct");
     if (usuarioId) {
       console.log(`Recuperado id de usuario: ${usuarioId}`);
       fetch(ruta + "usuarios/" + usuarioId, {
@@ -230,12 +229,6 @@ d.addEventListener("DOMContentLoaded", () => {
     }
   }
 
-
-  function limpiarUsuarioId() {
-
-    localStorage.removeItem("usuarioId");
-    console.log("usuarioId eliminado de localStorage.");
-  }
 
   cargarInfoUsuario();
 
@@ -268,7 +261,8 @@ d.addEventListener("DOMContentLoaded", () => {
       return;
     }
 
-    const usuarioId = localStorage.getItem("usuarioId");
+    const usuarioId = localStorage.getItem("usuarioIdAct");
+    console.log(usuarioId);
     if (!usuarioId) {
       Swal.fire({
         icon: "error",
@@ -318,7 +312,6 @@ d.addEventListener("DOMContentLoaded", () => {
           text: "La información del usuario ha sido actualizada correctamente.",
           confirmButtonText: "Aceptar",
         }).then(() => {
-          limpiarUsuarioId();
           window.location.href = "verUsuarios.html";
         });
       })

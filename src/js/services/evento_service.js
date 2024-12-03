@@ -92,6 +92,7 @@ d.addEventListener("DOMContentLoaded", () => {
           return res.json();
         })
         .then((data) => {
+          console.log("evento creado")
           console.log(data);
           if (data.type === "SUCCESS") {
             Swal.fire({
