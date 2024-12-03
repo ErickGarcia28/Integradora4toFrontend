@@ -70,6 +70,9 @@ d.addEventListener("DOMContentLoaded", () => {
     });
   }
 
+
+
+
   const $users_container = d.getElementById("usuarios_container");
 
   fetch(ruta + "usuarios/all", {
@@ -86,18 +89,21 @@ d.addEventListener("DOMContentLoaded", () => {
     })
     .then((data) => {
       console.log(data.result);
+      
       const usuarioId = localStorage.getItem("usuarioId");
+  
+      function esUsuarioExcluido(usuario) {
+        return usuario.correoElectronico.toLowerCase() === "superadminejemplo@example.com" || usuario.id == usuarioId;
+    }
+  
       data.result.forEach((usuario) => {
-        
-        if(usuario.ROL == "SUPERADMIN"){
-          console.log("si ");
-          return;
+        if (esUsuarioExcluido(usuario)) {
+          return; 
         }
-
+  
         const $card_user = d.createElement("div");
         $card_user.classList.add("card");
         $card_user.innerHTML = `
-        
           <div class="card-content">
             <h3>${usuario.nombre}</h3>
             <p>${usuario.correoElectronico}</p>
@@ -105,43 +111,41 @@ d.addEventListener("DOMContentLoaded", () => {
             <p><strong>Estado:</strong> ${
               usuario.status ? "Activo" : "Deshabilitado"
             }</p>
-          
-          <div class="more-info">
-            <button id="btn-status-${usuario.id}" class="btn-status ${
+            <div class="more-info">
+              <button id="btn-status-${usuario.id}" class="btn-status ${
           usuario.status ? "btn-red" : "btn-green"
         }">
-              ${usuario.status ? "DESHABILITAR" : "ACTIVAR"}
-            </button>
-            <button id="btn-editar${
-              usuario.id
-            }" class="btn-details"><a href="actUsuario.html">EDITAR</a></button>
+                ${usuario.status ? "DESHABILITAR" : "ACTIVAR"}
+              </button>
+              <button id="btn-editar${
+                usuario.id
+              }" class="btn-details"><a href="actUsuario.html">EDITAR</a></button>
+            </div>
           </div>
-        </div>
-      `;
-
+        `;
+  
         if ($users_container) {
           $users_container.appendChild($card_user);
         }
-
+  
         const botonEstado = d.getElementById(`btn-status-${usuario.id}`);
         const btnDetails = d.getElementById(`btn-editar${usuario.id}`);
-
+  
         if (botonEstado) {
           botonEstado.addEventListener("click", () => {
             cambiarEstado(usuario.id, usuario.status);
           });
         }
-
-        if (botonEstado) {
+  
+        if (btnDetails) {
           btnDetails.addEventListener("click", () => {
             localStorage.setItem("usuarioId", usuario.id);
-            console.log(
-              `Categoría con id ${usuario.id} guardada en localStorage.`
-            );
+            console.log(`Usuario con id ${usuario.id} guardado en localStorage.`);
           });
         }
       });
     });
+  
 
   function cambiarEstado(usuarioId, estadoActual) {
     const token = localStorage.getItem("authToken");
@@ -226,6 +230,13 @@ d.addEventListener("DOMContentLoaded", () => {
     }
   }
 
+
+  function limpiarUsuarioId() {
+
+    localStorage.removeItem("usuarioId");
+    console.log("usuarioId eliminado de localStorage.");
+  }
+
   cargarInfoUsuario();
 
   const $btnActualizar = document.getElementById("actualizar-usuario-btn");
@@ -307,6 +318,7 @@ d.addEventListener("DOMContentLoaded", () => {
           text: "La información del usuario ha sido actualizada correctamente.",
           confirmButtonText: "Aceptar",
         }).then(() => {
+          limpiarUsuarioId();
           window.location.href = "verUsuarios.html";
         });
       })
@@ -321,4 +333,8 @@ d.addEventListener("DOMContentLoaded", () => {
         });
       });
   }
+
+
+
+
 });
