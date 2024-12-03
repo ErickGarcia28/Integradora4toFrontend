@@ -89,7 +89,7 @@ d.addEventListener("DOMContentLoaded", () => {
       const usuarioId = localStorage.getItem("usuarioId");
       data.result.forEach((usuario) => {
         
-        if(usuario.id == usuarioId){
+        if(usuario.ROL == "SUPERADMIN"){
           console.log("si ");
           return;
         }
