@@ -92,7 +92,7 @@ d.addEventListener("DOMContentLoaded", () => {
           return res.json();
         })
         .then((data) => {
-          console.log("evento creado")
+          console.log("evento creado");
           console.log(data);
           if (data.type === "SUCCESS") {
             Swal.fire({
@@ -257,7 +257,7 @@ d.addEventListener("DOMContentLoaded", () => {
         <div class="card" data-event-id="${event.id}">
           <div class="card-content">
             <h3>${event.nombre}</h3>
-            <p><b>Fecha</b>: ${new Date(event.fecha).toLocaleDateString()}</p>
+            <p><b>Fecha</b>: ${event.fecha}</p>
             <p><b>Hora</b>: ${event.hora}</p>
             <p><b>Lugar</b>: ${event.lugar}</p>
           </div>
