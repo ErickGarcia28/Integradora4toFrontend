@@ -40,6 +40,7 @@ main {
 }
 
 .card {
+    text-align: center;
     background-color: white;
     border: 1px solid #ddd;
     border-radius: 10px;
@@ -69,6 +70,7 @@ main {
 
 
 .entry-area {
+    margin-top: 5%;
     position: relative;
     width: 100%;
     height: 60px; 

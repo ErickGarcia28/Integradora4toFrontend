@@ -301,10 +301,14 @@ function obtenerCategoriasActivas() {
     }
   }
 
-  cargarInfoCategoria();
+  if(w.location.href.includes("actCategoria.html")){
+    cargarInfoCategoria();
+  }
 
   const $btnActualizar = d.getElementById("actualizar-cat-btn");
-  $btnActualizar.addEventListener("click", actualizarCategoria);
+  if($btnActualizar){
+    $btnActualizar.addEventListener("click", actualizarCategoria);
+  }
 
   function actualizarCategoria() {
     const nombreCategoria = d

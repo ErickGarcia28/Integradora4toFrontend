@@ -516,7 +516,7 @@ body{
 .btn-editar{
     font-family: "Roboto Condensed", sans-serif;
     font-size: 0.8rem;
-    background-color: var(--color5);
+    background-color: var(--color4);
     border: none;
     border-radius: 5px;
     color: var(--color2);

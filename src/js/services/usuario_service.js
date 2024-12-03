@@ -230,7 +230,9 @@ d.addEventListener("DOMContentLoaded", () => {
   }
 
 
-  cargarInfoUsuario();
+  if(w.location.href.includes("actUsuario.html")){
+    cargarInfoUsuario();
+  }
 
   const $btnActualizar = document.getElementById("actualizar-usuario-btn");
   if ($btnActualizar) {
