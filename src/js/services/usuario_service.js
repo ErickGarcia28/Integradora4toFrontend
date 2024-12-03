@@ -86,7 +86,14 @@ d.addEventListener("DOMContentLoaded", () => {
     })
     .then((data) => {
       console.log(data.result);
+      const usuarioId = localStorage.getItem("usuarioId");
       data.result.forEach((usuario) => {
+        
+        if(usuario.id == usuarioId){
+          console.log("si ");
+          return;
+        }
+
         const $card_user = d.createElement("div");
         $card_user.classList.add("card");
         $card_user.innerHTML = `
