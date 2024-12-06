@@ -224,47 +224,8 @@
     </footer>
     
 
-    <script>
-      
-      document.addEventListener("DOMContentLoaded", () => {
-    const searchInput = document.querySelector(".search-input");
-    const cardsContainer = document.querySelector(".cards-container");
-    const cards = document.querySelectorAll(".card");
-
-    // Crea un elemento para el mensaje de "No se encontraron coincidencias"
-    const noResultsMessage = document.createElement("div");
-    noResultsMessage.textContent = "No se encontraron coincidencias, intente de nuevo.";
-    noResultsMessage.classList.add("no-results-message"); // Clase CSS para el estilo
-    noResultsMessage.style.display = "none"; // Ocultarlo por defecto
-    cardsContainer.appendChild(noResultsMessage);
-
-    // Escucha el evento 'input' en el campo de búsqueda
-    searchInput.addEventListener("input", () => {
-        const query = searchInput.value.toLowerCase().trim(); // Convierte a minúsculas y elimina espacios
-        let hasVisibleCards = false;
-
-        cards.forEach(card => {
-            const cardContent = card.innerText.toLowerCase(); // Convierte el contenido de la tarjeta a minúsculas
-            if (cardContent.includes(query)) {
-                card.style.display = ""; // Muestra la tarjeta si coincide
-                hasVisibleCards = true;
-            } else {
-                card.style.display = "none"; // Oculta la tarjeta si no coincide
-            }
-        });
-
-        // Mostrar mensaje si no hay tarjetas visibles
-        if (hasVisibleCards) {
-            noResultsMessage.style.display = "none";
-        } else {
-            noResultsMessage.style.display = "flex";
-        }
-    });
-});
-    </script>
 
     <script src="../js/services/carga_eventos.js" type="module"></script>
-</body>
-</html>
+
 </body>
 </html>
