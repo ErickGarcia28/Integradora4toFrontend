@@ -13,6 +13,9 @@
 
     <link rel="icon" href="/img/detalles.png" type="image/x-icon">
 
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+
 
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&display=swap');
@@ -20,14 +23,15 @@
 
     <title>Detalles del evento</title>
 </head>
+
+
+
 <body>
     
-
-
     <header>
         <nav>
             <ul class="nav-bar">
-                <li class="logo"><a href="#">Event<span class="tit">-hub</a></span></li>
+                <li class="logo"><a href="#">Event<span class="tit">-hub</span></a></li>
                     
                     <input type="checkbox" id="check"/>
                     <span class="menu">
@@ -129,7 +133,8 @@
     <p>&copy; 2024 EVENT-HUB. | GMMOP</p>
 </footer>
 
-<script src="../js/services/carga_eventos.js" type="module"></script>  
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="../js/services/carga_eventos.js" type="module" defer></script>  
+
+
 </body>
 </html>
